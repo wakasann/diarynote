@@ -1,3 +1,7 @@
+- [x] All published to blog
+
+------
+
 # laravel sql mode only_full_group_by#
 
 環境:
