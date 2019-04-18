@@ -37,9 +37,10 @@ sudo ./xampp*.run
 sudo chmod 777 /opt/lampp/htdocs
 
 vim ~/.profile
-```
 
+```
 add following content at ~/.profile at end line
+```
 
 ```
 export XAMPP_HOME=/opt/lampp
