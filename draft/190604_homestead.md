@@ -121,6 +121,12 @@ sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_
 max_allowed_packet=100M
 ```
 
+
+
+注: 如果需要 mysql中的 date 和datetime可以为 `0000-00-00 00:00:00`的格式的话，需要将上面的 `NO_ZERO_IN_DATE,NO_ZERO_DATE` 移除掉
+
+
+
 避免出现 `#3065 - Expression #1 of ORDER BY clause is not in SELECT list` 这样的错误提示
 
 
@@ -129,3 +135,4 @@ max_allowed_packet=100M
 1. [Ubuntu 16.04 几个国内更新源](https://www.cnblogs.com/bovenson/p/5752213.html)
 2. [ubuntu16.04安装php5](https://www.cnblogs.com/yxhblogs/p/5842568.html)
 3. [Cannot add PPA: 'ppa:ondrej/php5-5.6'](https://stackoverflow.com/a/40677790)
+4. [MySQL 5.7 以上版本默认禁止 0000-00-00 的日期](https://www.cnblogs.com/dannyyao/p/8126193.html)
