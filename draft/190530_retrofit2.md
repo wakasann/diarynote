@@ -33,3 +33,4 @@ implementation("com.squareup.okhttp3:logging-interceptor:3.14.2")
 2. [Rxjava2+Retrofit2+MVP的网络请求封装](https://www.jianshu.com/p/193d8c37c73c)
 3. [【Android - 框架】之RxJava的使用](https://www.cnblogs.com/itgungnir/p/6210844.html)
 4. [给 Android 开发者的 RxJava 详解](http://gank.io/post/560e15be2dca930e00da1083#toc_1) 自己通过这篇文章来了解rxjava :smile:
+5. [Retrofit 2.0使用(2)如何使用@Body的形式发送Post](https://www.cnblogs.com/fengfenghuifei/p/6038309.html)
