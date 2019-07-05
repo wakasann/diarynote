@@ -183,6 +183,99 @@ sudo apt-get install librrd-dev
 ```
 
 
+1. centos 6.10 尝试cacti
+
+因虚拟机已经安装好 php 5.6.40,mysql 5.5.31，因为php和mysql的版本比较低，故选择了`cacti-0.8.8a`版本进行安装
+
+```
+mysql -u root -p # 进入mysql终端
+```
+
+sql(创建cacti)
+
+```
+create database cacti default character set utf8; #创建cacti数据库
+grant all on cacti.* to cacti@localhost identified by 'asd123'; #创建cacti用户，密码为 asd123,并赋予 cacti数据库的所有权限给cacti用户
+ GRANT SELECT ON mysql.time_zone_name TO cacti@localhost IDENTIFIED BY 'cactiwhsir';
+grant all on cacti.* to cacti@localhost identified by 'asd123';
+flush privileges;
+```
+
+```
+yum install rrdtool
+yum -y install net-snmp net-snmp-utils
+yum -y install rrdtool rrdtool-devel
+
+useradd cacti
+useradd -M -s /sbin/nologin cacti
+wget https://www.cacti.net/downloads/cacti-0.8.8a.zip
+tar zxvf cacti-0.8.8a.tar.gz
+mv cacti-0.8.8a cacti
+chown -R cacti.cacti ./cacti
+cd cacti
+vim include/config.php # 修改数据库配置配置文件
+```
+
+```
+$database_type = "mysql";
+$database_default = "cacti"; //数据库名称
+$database_hostname = "localhost";
+$database_username = "cacti"; //数据库用户名
+$database_password = "asd123"; //数据库用户密码
+$database_port = "3306";
+$database_ssl = false;
+```
+
+
+```
+mysql -u cacti -p cacti < cacti.sql #导入cacti文件下的cacti.sql到cacti数据库
+cd ..
+chown -R root:root cacti
+```
+
+通过浏览器访问`http://ip/cacti` 就会跳入安装页面
+
+![](images/190705/20190705102706.png)
+
+![](images/190705/20190705102811.png)
+
+![](images/190705/20190705103013.png)
+
+会跳到登入页面，默认用户名和密码都是 `admin`
+
+![](images/190705/20190705103158.png)
+
+首次登录成功，会跳到修改`admin`用户的密码页面,重复输入两次新密码，点击"Save" 就安装完成了。
+
+![](images/190705/20190705103253.png)
+
+在 linux系统中，添加 crontab 任务,每1分钟执行一次`poller.php`
+
+```
+crontab -e
+```
+
+在打开文件的内容末尾添加:
+
+```
+*/1 * * * * /usr/bin/php /var/www/html/cacti/poller.php > /dev/null
+```
+
+然后保存退出，使用 `sudo service cron restart` 重启 cron服务
+
+
+如果运行`snmpwalk -c public -v 2c 127.0.0.1`出现:
+
+```
+SNMPv2-SMI::mib-2 = No more variables left in this MIB View (It is past the end of the MIB tree)
+
+snmpwalk -v 2c -c public 127.0.0.1 1.3.6.1.2.1.25.3.2.1
+```
+
+是snmpd.conf配置文件中配置出现问题,修改了 snmpd.conf文件，需要重启snmpd服务 `sudo service snmpd restart`
+
+
+
 ##### references
 1. [ubuntu16.04安装python-rrdtool](https://blog.51cto.com/12674335/2152871)
 2. [详解zabbix安装部署（Server端篇）](http://blog.chinaunix.net/uid-25266990-id-3380929.html)
@@ -192,3 +285,6 @@ sudo apt-get install librrd-dev
 6. [zabbix监控进程的CPU和内存占用量](https://blog.51cto.com/xianglinhu/1657570)
 7. [mysql性能监控相关](https://my.oschina.net/dlpinghailinfeng/blog/170068) 知道其它监控工具
 8. [Zabbix 3.0 从入门到精通(zabbix使用详解)](https://www.cnblogs.com/clsn/p/7885990.html)
+9. [Cacti不显示图片(nan)](https://www.cnblogs.com/oskb/p/5532297.html)  学习配置snmpd
+10. [CentOS 7-Cacti 0.8.8g 多核心CPU使用率整合一張圖表顯示](https://blog.pmail.idv.tw/?p=13648) 安装了cacti cpu多个核心的模板和sh文件，将sh文件放入到 cacti项目的`scripts`文件夹就可以
+11. [CentOS 查看系统 CPU 个数、核心数、线程数](https://www.cnblogs.com/hapday/p/6336905.html)
