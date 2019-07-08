@@ -178,8 +178,7 @@ sudo yum install rrdtool librrd-dev
 ubuntu:
 
 ```
-sudo apt-get install rrdtool
-sudo apt-get install librrd-dev
+sudo apt-get install rrdtool librrd-dev
 ```
 
 
@@ -202,7 +201,6 @@ flush privileges;
 ```
 
 ```
-yum install rrdtool
 yum -y install net-snmp net-snmp-utils
 yum -y install rrdtool rrdtool-devel
 
@@ -288,3 +286,4 @@ snmpwalk -v 2c -c public 127.0.0.1 1.3.6.1.2.1.25.3.2.1
 9. [Cacti不显示图片(nan)](https://www.cnblogs.com/oskb/p/5532297.html)  学习配置snmpd
 10. [CentOS 7-Cacti 0.8.8g 多核心CPU使用率整合一張圖表顯示](https://blog.pmail.idv.tw/?p=13648) 安装了cacti cpu多个核心的模板和sh文件，将sh文件放入到 cacti项目的`scripts`文件夹就可以
 11. [CentOS 查看系统 CPU 个数、核心数、线程数](https://www.cnblogs.com/hapday/p/6336905.html)
+12. [Cacti 監測 MySQL 伺服器](https://www.opencli.com/linux/cacti-monitoring-mysql-server) cacti 添加监听mysql
