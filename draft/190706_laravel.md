@@ -1,3 +1,5 @@
+- [x] All published to blog
+
 # laravel migration check table exist
 
 ```php
