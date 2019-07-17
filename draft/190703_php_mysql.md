@@ -154,10 +154,130 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 
 
+通过上面的步骤，已经安装完成了，可以通过`sudo docker version` 查看docker的版本
+
+
+
+#### 安装后续步骤
+
+1. 以非root用户身份管理docker
+
+要创建 docker 用户组及加入用户进这个组
+
+1.1 创建用户组
+
+```
+sudo groupadd docker
+```
+
+1.2 将自己的用户加入到 docker 用户组中
+
+```
+sudo usermod -aG docker 用户名
+```
+
+1.3 注销并重新登录以重新验证组成员关系
+
+如果是在虚拟机上进行测试，则可能需要重新启动虚拟机才能使更改生效。
+
+重启 docker 服务
+
+```
+sudo systemctl restart docker
+```
+
+2. 配置  Docker 服务开机启动
+
+```
+sudo systemctl enable docker
+```
+
+3. 卸载 Docker CE
+
+如果需要卸载安装的Docker CE,可以通过下面的命令进行卸载
+
+3.1 先禁用 docker 开机启动项
+
+```
+sudo systemctl disable docker
+```
+
+3.2 卸载 Docker CE 包
+
+```
+sudo apt-get purge docker-ce
+```
+
+3.3  在你主机上面的镜像,容器，挂载目录，或者自定义配置文件 没有自动删除掉，删除所有的镜像，容器和挂载目录:
+
+```
+sudo rm -rf /var/lib/docker
+```
+
+你必须删除掉手动编辑过的配置文件。
+
+
+4. 安装 Docker Compose
+
+在 linux，你可以 通过 [Github Compose 仓库的发布页面](https://github.com/docker/compose/releases) 下载 Docker Compose 二进制文件。通过终端的 curl 命令安装 Docker Compose
+
+4.1 运行这个命令下载 Docker Compose 当前发布的版本
+
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+
+安装时，最新的版本是 `1.24.0`，如果需要安装其它版本，替换`1.24.0` 为安装的版本。
+
+4.2  添加执行权限给这个文件
+
+```
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+测试安装
+
+```
+docker-compose --version
+```
+
+4.5 卸载通过 curl 安装的Docker Compose
+
+```
+sudo rm /usr/local/bin/docker-compose
+```
+
+5. docker 使用国内的镜像源，让拉包的速度快一些
+
+修改 `/etc/docker/daemon.json` 文件并添加上 registry-mirrors 键值
+
+```
+sudo vim /etc/docker/daemon.json
+```
+
+内容为:
+
+```
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
+
+然后重启 docker 服务，使配置生效
+
+```
+sudo systemctl restart docker
+```
+
+
 ##### references
 1. [Get Docker CE for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 2. [Install Docker Compose](https://docs.docker.com/compose/install/)
 3. [Ubuntu16.04 安装 Docke r及 docker-compose](https://blog.csdn.net/diligent_lee/article/details/79098302)
+4. [linux systemctl命令详解](https://www.jb51.net/article/136559.htm) 了解到 systemctl命令的参数
+5. [Docker Hub 源使用帮助](http://mirrors.ustc.edu.cn/help/dockerhub.html#docker-hub) 中科大开源镜像站
+6. [docker改国内官方镜像](https://www.cnblogs.com/coolwinds/p/7465475.html)
+7. [Docker 中国官方镜像加速](https://www.cnblogs.com/weifeng1463/p/7468391.html)
 
 
 # 了解linux 检测工具
