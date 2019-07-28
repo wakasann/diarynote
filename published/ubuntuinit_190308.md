@@ -1,12 +1,12 @@
 install software
 
-1. vim 
+### vim 
 
 ```
 sudo apt-get install -y vim
 ```
 
-1. [Typora](https://www.typora.io/)
+### [Typora](https://www.typora.io/)
 
  command copy from Typora website
 
@@ -27,7 +27,7 @@ sudo apt-get update
 sudo apt-get install typora
 ```
 
-2. [Xampp](https://www.apachefriends.org/index.html)
+###  [Xampp](https://www.apachefriends.org/index.html)
 
 download for linux run file at web browser, then go to download path at Terminal
 
@@ -51,7 +51,7 @@ export PATH=${XAMPP_HOME}/bin:$PATH
 source ~/.profile
 ```
 
-3. install [composer](https://getcomposer.org/download/)
+### install [composer](https://getcomposer.org/download/)
 
 at composer download page,last version is 1.8.4
 
@@ -61,18 +61,20 @@ at composer download page,last version is 1.8.4
 wget https://getcomposer.org/download/1.8.4/composer.phar
 chmod +x composer.phar
 sudo mv composer.phar /usr/local/bin/composer
-# config composer repo.packagist
+
+### config composer repo.packagist
+
 composer config -g repo.packagist composer https://packagist.phpcomposer.com
 ```
 
-3. install ibus sunyinpin
+### install ibus sunyinpin
 
 ```
 sudo apt-get update
 sudo apt-get install ibus-pinyin ibus-sunpinyin
 ```
 
-4. install nodejs [Ubuntu安装最新版nodejs](https://www.cnblogs.com/flying_bat/p/8671816.html)
+### install nodejs [Ubuntu安装最新版nodejs](https://www.cnblogs.com/flying_bat/p/8671816.html)
 
 ```
 sudo apt-get install -y nodejs npm
@@ -81,8 +83,11 @@ sudo npm install n -g
 sudo n stable
 ```
 
-5. redis `sudo apt-get install redis-server`
-6. [git push错误failed to push some refs to的解决](https://www.cnblogs.com/henry2018/p/9567167.html)
+### redis 
+```
+sudo apt-get install redis-server
+```
+
 7. ubuntu 开机之后，会进入 initramfs界面
 
 ```
@@ -97,3 +102,6 @@ fsck /dev/sda1 -y
 'mcrypt_create_iv(): Cannot open source device'
 ```
 
+------
+
+9. [git push错误failed to push some refs to的解决](https://www.cnblogs.com/henry2018/p/9567167.html)
