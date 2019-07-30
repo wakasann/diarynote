@@ -319,8 +319,293 @@ sudo mv composer.phar /usr/local/bin/composer
 composer -V
 ```
 
+## Redis的安装(可选)
+
+
+
+进入[Redis](https://redis.io/download) ,需要不同的版本，可以在官网页面中进行选择
+
+![](upload/190730/20190730141604.png)
+
+上图框住的部分，鼠标放上去可以看到链接，鼠标在下载链接上右键，选择"复制链接地址(E)"(Chrome浏览器的右键菜单选项)
+
+1. 下载 安装包
+
+```
+wget http://download.redis.io/releases/redis-4.0.14.tar.gz
+```
+
+2. 解压和安装
+
+```
+tar -xzf redis-4.0.14.tar.gz
+cd redis-4.0.14
+sudo make
+sudo make install
+```
+> Redis没有其他外部依赖，安装过程很简单。编译后在Redis源代码目录的src文件夹中可以找到若干个可执行程序，安装完后，在/usr/local/bin目录中可以找到刚刚安装的redis可执行文件。如下图
+
+![](upload/190730/20190730142334.png)
+
+4. 启动 redis
+
+直接执行 `redis-server` 命令就启动了
+
+随开机启动脚本，在`/etc/init.d/`文件夹下创建一个`redis_端口号`的文件，如`redis_6379`
+
+5. 创建文件夹
+
+```
+# 创建存放redis配置的文件夹
+sudo mkdir -p /etc/redis
+# 创建存放redis 数据的文件夹,端口号，默认是6379
+sudo mkdir -p /var/redis/端口号
+```
+
+6. 修改配置文件
+
+```
+# 进入下载 redis-4.0.14.tar.gz 文件时的目录，复制文件配置模板到 /etc/redis,并重命名为`6379.conf`
+sudo cp redis-4.0.14/redis.conf /etc/redis/6379.conf
+```
+
+> 首先将配置文件模板（redis-4.0.14/redis.conf）复制到/etc/redis 目录中，以端口号命名（如“6379.conf”），然后按照下表对其中的部分参数进行编辑。
+
+| 参数 | 值 | 说明 |
+| ------ | ------ | ------ |
+| daemonize | yes | 使Redis以守护进程模式运行(由`no`改为`yes`) |
+| pidfile | `/var/run/redis_端口号.pid` | 设置Redis的PID文件位置(默认已是`/var/run/redis_6379.pid`，不用修改) |
+| port | 端口号 | 设置Redis监听的端口号(默认是6379,不用修改) |
+| dir | `/var/redis/端口号` | 设置持久化文件存放位置，默认是`dir ./`，修改为`/var/redis/6379` |
+
+7. 创建 `/etc/init.d/redis_6379` 文件并进行配置
+
+```
+sudo vim /etc/init.d/redis_6379
+```
+
+在vim编辑器中填入以下内容
+
+```
+#!/bin/bash
+# /etc/init.d/redis_6379
+
+### BEGIN INIT INFO
+# Provides: redis_6379
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: redis server script
+# Description: This service is used to manage redis-server start or stop
+### END INIT INFO
+
+REDISPORT=6379
+EXEC=/usr/local/bin/redis-server
+CLIEXEC=/usr/local/bin/redis-cli
+
+PIDFILE=/var/run/redis_${REDISPORT}.pid
+CONF="/etc/redis/${REDISPORT}.conf"
+
+case "$1" in
+     start)
+          if [ -f $PIDFILE ];
+          then
+              echo "$PIDFILE exists,redis-server is already running or crashed"
+          else
+              echo "Starting Redis Server"
+              $EXEC $CONF
+          fi
+        ;;
+     stop)
+        echo "Stopping Redis Server"
+        #killall redis server
+        kill $(ps aux | grep -m 1 "${EXEC}" | awk '{ print $2 }')
+        ;;
+     *)
+         echo "Usage: service redis_6379 start|stop"
+         exit 1
+        ;;
+esac
+exit 0
+```
+
+保存之后，就可以通过以下命令来启动或者停止 redis-server 了
+
+```
+# 启动redis server
+sudo service redis_6379 start
+# 停止redis server
+sudo service redis_6379 stop
+```
+
+8. 启用redis-server开机启动
+
+```
+sudo chkconfig redis_6379 on
+```
+
+列出redis的启动信息
+
+```
+chkconfig --list | grep "redis"
+```
+如果列表中出现了
+
+```
+redis_6379     	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+```
+
+说明开机启动设置成功了
+
+
+## 部署Laravel到生成环境的优化
+
+安装包
+
+```
+composer install --optimize-autoloader --no-dev
+```
+> 其中，`--optimize-autoloader` 表示生成优化后的自动加载器，虽然生成过程可能较慢，但换来的是提高运行时的效率。`--no-dev` 表示不安装 composer.json 中 require-dev 声明的扩展包，在生产环境中我们不需要这些开发依赖。
+
+建立缓存
+```
+php artisan optimize
+php artisan api:cache
+php artisan route:cache
+php artisan view:clear
+php artisan config:cache
+```
+
+## supervisor (可选)
+
+因为 Centos 6.5 通过Yum 安装的 supervisor 的版本是 `2.1`
+
+可以通过`yum info supervisor` 查询`supervisor`的信息
+
+如果已通过 yum 命令安装了`supervisor` 2.1,可以通过`yum remove supervisor*`来卸载。
+
+
+
+### 安装 supervisor
+
+```
+# 查看python版本
+[vagrant@centos tmp]$  python -V
+Python 2.6.6
+```
+
+指定安装supervisor 3.1.3版本，这个版本可以用python2.6，直接装了就能用。可以`pip install supervisor==3.1.3`或者`easy_install supervisor==3.1.3`
+
+我是通过下面安装的:
+
+```
+easy_install supervisor==3.1.3
+```
+
+### 配置
+
+1. 生成配置文件
+
+```
+echo_supervisord_conf > /etc/supervisord.conf
+```
+
+2. 编辑配置文件
+
+```
+sudo vim /etc/supervisord.conf
+```
+
+找到
+```
+;[include]
+;files = relative/directory/*.ini
+```
+
+改为
+
+```
+[include]
+;files = relative/directory/*.ini
+files = /etc/supervisor/conf.d/*.conf
+```
+
+保存之后，创建包含的目录
+
+```
+sudo mkdir -p /etc/supervisor/conf.d
+```
+
+以后工作的配置文件就可以放在这个目录里了
+
+3. 启动supervisord
+
+使用 `/etc/supervisord.conf` 配置文件来启动`supervisord` 服务
+```
+/usr/bin/supervisord -c /etc/supervisord.conf
+```
+
+4. 常用的命令小记
+
+```
+#查看状态
+supervisorctl status
+# 添加或者修改了配置文件，需要重新加载
+supervisorctl reload
+# 重启所有
+supervisorctl restart all
+```
+
+
+
+## 遇见的问题
+
+### Apache error: _default_ virtualhost overlap on port 443或者80
+
+ `Apache error: _default_ virtualhost overlap on port 443或者80`,修改 `httpd.conf`文件，大概在 1002行左右添加
+
+```
+NameVirtualHost *:80
+#如果需要使用到https,需要添加 443端口
+NameVirtualHost *:443 
+```
+
+### You don't have permission to access /index.html on this server.
+
+当确认了 `DocumentRoot` 如`/home/testdomain/public_html`三级文件夹和`index.html`的权限都是 755(drwxrwxr-x)之后，访问还是 `You don't have permission to access /index.html on this server.`
+
+可以检查Centos的`selinux`状态，尝试关闭SELinux访问之后，应该就可以访问到
+
+#### 查看 SELinux状态
+
+```
+[vagrant@centos tmp]$ getenforce
+Enforcing #是启用的，如果返回Disabled，就是已经禁用了
+```
+#### 临时关闭
+
+```
+sudo setenforce 0
+```
+#### 永久关闭
+
+`vi /etc/selinux/config`
+
+将`SELINUX=enforcing`改为`SELINUX=disabled `
+设置后需要重启才能生效
+
+
+
+
 ##### References
+
 1. [CentOS6.5 下升级 PHP7、MySQL5.7](https://laravel-china.org/topics/2289/centos65-upgrade-php7-mysql57) 文章安装部分文字描述主要参考
 1. [centos 6.5 防火墙开放指定端口](https://www.cnblogs.com/tiandi/p/10152775.html) 简单快速设置好  iptables
 2. [Centos查看端口占用情况和开启端口命令](https://www.centos.bz/2018/03/centos%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E6%83%85%E5%86%B5%E5%92%8C%E5%BC%80%E5%90%AF%E7%AB%AF%E5%8F%A3%E5%91%BD%E4%BB%A4/) 开放端口的内容规则，但是新增的规则一定要放在`-A FORWARD`开头这1行的前面，不然重启 iptables 不会生效
 3. [CentOS / httpd > Starting httpd: httpd: apr_sockaddr_info_get() failed for [hostname].localdomain](https://qiita.com/7of9/items/a8f856653591dbf73f42) centos httpd 重啓顯示 `httpd: apr_sockaddr_info_get() failed for`的解决参考
+4. [CentOS 7.X 关闭SELinux](https://www.cnblogs.com/activiti/p/7552677.html) SELinux关闭参考
+5. [CentOS下Redis的安装](https://www.cnblogs.com/renzhicai/p/7773080.html) redis 安装参考
+6. [linux chkconfig 使用说明](https://www.cnblogs.com/lfxiao/p/9528187.html) 了解chkconfig使用很有帮助
+7. [（上线时清缓存）laravel 5.1 的程序性能优化(配置文件) - 简书](https://www.cnblogs.com/wzjwffg/p/9882696.html) 和 [轻松部署 Laravel 应用 | 《10. 手动部署 - 生产环境的必要优化》](https://learnku.com/articles/25752)
+8. [centos6.5安装supervisor](https://www.cnblogs.com/xiaxiaosheng/p/10937740.html) Centos 6.5下安装 supervisor 3 的解决方法和[centos下安装supervisor的步骤详解](https://www.php.cn/linux-413808.html) 很详细

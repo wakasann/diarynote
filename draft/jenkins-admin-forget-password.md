@@ -26,3 +26,4 @@ sudo vim admin/config.xml
 
 ##### References
 1. [Jenkins 忘记admin密码拯救方法](https://www.cnblogs.com/huangenai/p/7416322.html)
+
