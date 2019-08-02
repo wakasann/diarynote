@@ -25,3 +25,4 @@ use mysql;
 create database test_db character set utf8;
 grant all privileges on test_db.* to testuser@'localhost' identified by '123456';
 ```
+

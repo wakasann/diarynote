@@ -9,6 +9,16 @@
 useradd <username>
 ```
 
+举例:
+
+`useradd <username> -s /bin/false -d /home/<username>`
+
+加了`-s /bin/false`  是不让该用户可以ssh登录
+
+参数 `-m`: 
+
+
+
 ## 给新增的用户设置密码
 
 ```
