@@ -309,7 +309,6 @@ max_allowed_packet=100M
 
 避免出现 `#3065 - Expression #1 of ORDER BY clause is not in SELECT list` 这样的错误提示
 
-
 ----
 
 新建的用户，如果遇到无法登入的情况，如登入时，提示`ERROR 1045 (28000): Access denied for user`,可能是密码输入不正确，通过重新修改这个用户的密码的方式进行处理
@@ -323,8 +322,6 @@ UPDATE mysql.user SET authentication_string=PASSWORD('root') WHERE USER='root'; 
 FLUSH PRIVILEGES; #刷新数据库。
 quit; #退出
 ```
-
-
 
 
 
