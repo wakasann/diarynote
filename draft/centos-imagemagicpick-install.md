@@ -83,11 +83,11 @@ imagick
 
 当然，你可以创建一个 php 文件，使用`phpinfo()`函数输出 php信息。
 
------
+## Laravel项目使用第三方类库来优化图片
 
-图片优化[image-optimizer](https://github.com/psliwa/image-optimizer)
+图片优化类库是: [image-optimizer](https://github.com/psliwa/image-optimizer)
 
-安装里面的依赖工具
+安装该类库里面的依赖工具
 
 1. [svgo](https://github.com/svg/svgo)
 
@@ -115,7 +115,7 @@ npm install -g svgo
 
 点击页面的下载源码包，然后跳到 sourceforge页面下载，等chrome出现下载，进入 chrome的下载管理，复制下载链接
 
-![](uploads/190812/20190812173836.png)
+![20190812173836.png](https://i.loli.net/2019/08/14/sLlFKmqwAXvaGfO.png)
 
 
 
@@ -208,6 +208,124 @@ ln -s /usr/local/lib/libpng16.so.16 /usr/lib64/
 
 [error while loading shared libraries libpng16](https://stackoverflow.com/a/46613940) 这里提到的在 `make install`之后，再运行`ldconfig`命令，感觉没有效果
 
+## 图片优化的代码记录
+
+先上传文件，上传完之后，判断文件是否是图片文件，如果是，进行图片优化，控制器`ToolsController.php`的代码如下
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class ToolsController extends Controller{
+
+	private function isImg($fileName)
+    { 
+         $file  = fopen($fileName, "rb"); 
+         $bin  = fread($file, 2); // 只读2字节 
+         
+         fclose($file); 
+         $strInfo = @unpack("C2chars", $bin); 
+         $typeCode = intval($strInfo['chars1'].$strInfo['chars2']); 
+         $fileType = ''; 
+         
+         if($typeCode == 255216 /*jpg*/ || $typeCode == 7173 /*gif*/ || $typeCode == 13780 /*png*/) 
+         { 
+          return $typeCode; 
+         }
+         else
+         { 
+          return false; 
+         } 
+    } 
+
+    public function upload(Request $request)
+    {
+        //判断请求中是否包含name=file的上传文件
+        if (!$request->hasFile('file')) {
+            return response()->json(array(
+            	'error_msg' => '请上传文件',
+            	'success' => false,
+            	'data' => array()
+            ));
+        }
+        // 判断图片上传中是否出错
+        $file = $request->file('file');
+        if (!$file->isValid()) {
+        	return response()->json(array(
+            	'error_msg' => '上传文件出错，请重试',
+            	'success' => false,
+            	'data' => array()
+            ));
+        }
+        $credentials = $request->all();
+        $entension = $file -> getClientOriginalExtension(); //  上传文件后缀
+        $filename = uniqid().mt_rand(1,9);  // 重命名图片
+        if(!empty($entension)){
+            $filename .= '.'.$entension;
+        }
+        if(!isset($credentials['dir'])){
+            $credentials['dir'] = 'temp';
+        }
+        $host = url('/');
+        $saveFilename =public_path().'/uploads/'.$credentials['dir'].'/'.$filename ;
+        $file->move(public_path().'/uploads/'.$credentials['dir'].'/',$filename);  // 重命名保存
+        $img_path = $host.'/uploads/'.$credentials['dir'].'/'.$filename;
+
+        try{
+        	 //$check = exif_imagetype($saveFilename);
+        	//$allowedExts = array(IMAGETYPE_JPEG, IMAGETYPE_PNG,IMAGETYPE_WEBP,IMAGETYPE_BMP);
+
+            $isImage = $this->isImg($saveFilename);
+            //1. 判断文件是否是图片
+            if($isImage !== false){
+                $factory = new \ImageOptimizer\OptimizerFactory(array(
+                    'pngquant_options' => ['--force', '--skip-if-larger','--quality 70-80']
+                ));
+                $optimizer = $factory->get();
+
+                $optimizer->optimize($saveFilename);
+            }
+        }catch(\Exception $e){
+            \Log::error("optimize error".$e->getMessage());
+        }
+       return response()->json(array(
+	       	'success' => true,
+	       	'error_msg' => '',
+	       	'data' => array(
+	       			'url'=>$img_path
+	       	)
+       ));
+    }
+}
+```
+
+### 备记
+
+本想直接使用php原生的`exif_imagetype()` 方法进行判断文件是否是图片，但是出现以下错误
+
+```
+exif_imagetype(): Read error!
+```
+
+通过下面命令，都可以当前LAMP环境是有开启对应的扩展的，但是就是读取错误
+
+```
+# php -m |grep exif
+
+exif
+
+# php -m |grep mbstring
+
+mbstring
+```
+
+
+
 ##### References
-1. [Install ImageMagick (Image Manipulation) Tool on RHEL/CentOS and Fedora](https://www.tecmint.com/install-imagemagick-in-linux/)
-2. [CentOS 6 系における tmux のインストール](https://qiita.com/szit/items/9c7e3831c03c42c360f3)
+1. [Install ImageMagick (Image Manipulation) Tool on RHEL/CentOS and Fedora](https://www.tecmint.com/install-imagemagick-in-linux/) 安装的步骤都是按这个博文来的
+2. [CentOS 6 系における tmux のインストール](https://qiita.com/szit/items/9c7e3831c03c42c360f3) 解决`error while loading shared libraries: libpng16.so.16`的错误
+3. [PHP 判断文件是否为图片的方法](http://kuanghy.github.io/2015/11/25/php-isimg) 判断文件是否是图片
