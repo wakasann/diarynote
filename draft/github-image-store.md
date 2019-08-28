@@ -5,7 +5,7 @@
 本文前提:
 
 1. 我个人博客的草稿是存放在 github上的一个仓库 [diarynote](https://github.com/wakasann/diarynote)
-2. 截图存放的图片或者需要放在文章中图片，会固定存放在对应的文件夹中，我个人是使用日期文件夹
+2. 截图存放的图片或者需要放在文章中图片，会固定存放在对应的文件夹中，我个人是使用日期文件夹，如: `uploads/190828/test.jpg`
 3. 本文中提到的`这个仓库`，都是指我自己的 [diarynote](https://github.com/wakasann/diarynote) 仓库
 
 
@@ -41,7 +41,7 @@ uploads
 替换为
 
 ```
-https://github.com/wakasann/diarynote/tree/master/draft/uploads
+https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads
 ```
 
 ------
@@ -69,7 +69,7 @@ https://github.com/wakasann/diarynote/tree/master/draft/uploads
 
 2. 使用github图床时,如: 如原博文中， markdown 图片路径是: `![](uploads/20190814/20190812173836.png)` ，在 `Typora` 和 在我自己基于Hexo的博客中，都可以直接显示图片。
 
-而我自己清楚我博客草稿仓库下的一个文件夹的路径固定是[https://github.com/wakasann/diarynote/tree/master/draft/](https://github.com/wakasann/diarynote/tree/master/draft/)，我只需要在 已有的Markdown 图片链接 前面加 `https://github.com/wakasann/diarynote/tree/master/draft/` 即可，以后github的图床不能使用时，我可以通过  sublime text 文本编辑工具，将这个仓库的所有Markdown 源文件的 `https://github.com/wakasann/diarynote/tree/master/draft/` 替换为空，然后就可以重新发布到基于Hexo的个人博客网站。但发布到非基于hexo 的其它平台时，自己还是无法避免要和自己上面提到的烦恼2 一样，一张一张的上传了。
+通过查看这个仓库的图片路径，发现在`dfaft`文件夹的的所有图片路径相同开头的路径是[https://raw.githubusercontent.com/wakasann/diarynote/master/draft/](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/)，我只需要在 已有的Markdown 文件中 图片链接 前面加 `https://raw.githubusercontent.com/wakasann/diarynote/master/draft/` 即可，以后github的图床不能使用时，我可以通过我自己喜欢的  sublime text 文本编辑工具，将这个仓库的所有Markdown 源文件的 `https://raw.githubusercontent.com/wakasann/diarynote/master/draft/` 替换为空，然后就可以重新发布到基于Hexo的个人博客网站上了，但发布到非基于hexo 的其它平台时，自己还是无法避免要和自己上面提到的烦恼2 一样，一张一张的上传了。
 
 ------
 
@@ -82,7 +82,7 @@ https://github.com/wakasann/diarynote/tree/master/draft/uploads
 
 我的个人博客目前是使用 hexo 进行搭建,存放的主机的1个月流量少，如下图:
 
-![](https://github.com/wakasann/diarynote/tree/master/draft/uploads/190828/20190828165503.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190828/20190828165503.jpg)
 
 发布在 博客园自己的博文的流量也是少的，所以没有 达到滥用的程度。
 
