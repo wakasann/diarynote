@@ -9,7 +9,7 @@ description:  修复Woocommerce用户登记不发送管理员邮件
 ---
 
 前提: Woocommerce的设置，`Emails`，`New account`是启用的
-![](uploads/190820/20190820181352.png)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190820/20190820181352.png)
 
 Wordpress 安装了 Woocommerce创建，登录和注册页面也是 Woocommerce的`account`页面，在 woocommerce的`account`页面登记，网站管理员邮箱 不会收到 新用户注册的注册通知。
 

@@ -45,22 +45,22 @@ public class MyTestJar{
 
 然后使用 jclasslib 工具打开 `MyTestJar.class`文件.
 
-![](uploads/190820/20190820144039.png)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190820/20190820144039.png)
 
 
 
 然后找到代码的方法，查看里面的 Code
 
-![](uploads/190820/20190820144157.png)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190820/20190820144157.png)
 
 1. 是查看 所有方法的`main` 方法，选中点击它，旧可以看到右边的`Bytecode` 窗口
 2.  找到了 需要修改的 值`Hello World`了，然后鼠标点击`#2`，会跳到下图
 
-![](uploads/190820/20190820144617.png)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190820/20190820144617.png)
 
 3. 下一步使用鼠标点击`cp info #21`, 会跳到如下图
 
-   ![](uploads/190820/20190820144809.png)
+   ![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190820/20190820144809.png)
 
 然后记录 这个的索引是`21`,在修改这个值的时候会使用到
 
@@ -73,7 +73,7 @@ public class MyTestJar{
 在左边的项目名称上鼠标右键，依次选择 `Build Path` -> `Add External Archives...`,然后选中 `jclasslib` 安装路径`lib` 文件夹下的所有 jar包
 最终项目 引入的包如下图
 
-![](uploads/190820/20190820145933.png)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190820/20190820145933.png)
 
 下一步 创建进行 class 文件的类，如:`Test`
 
@@ -132,7 +132,7 @@ public class Test {
 
 下一步 在 Eclipse ide，在打开的 `Test`类编辑窗口中点击右键，然后选中 `Run as` -> `1 Java Application Alt + Shit + x,j`
 
-![](uploads/190820/20190820150954.png)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190820/20190820150954.png)
 
 控制台没有出现错误，即运行修改了。
 
@@ -155,7 +155,7 @@ output String:jclasslib Changed
 
 或者通过 `JD GUI` 工具查看`.class` 文件，查看修改的地方是否修改到
 
-![](uploads/190820/20190820151551.png)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190820/20190820151551.png)
 
 查看变量的值是修改后的，修改成功 ✅
 
