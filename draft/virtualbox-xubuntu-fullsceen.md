@@ -1,3 +1,5 @@
+尝试让Virtualbox的Ubuntu可以调整分辨率
+
 在Virtualbox安装的Ubuntu,默认不是全屏，操作起来不是很方便，网上查了资料，按照网上的教程来操作并记录下自己的操作记录。
 
 
@@ -5,22 +7,23 @@
 在安装的Ubuntu的虚拟机，通过 "设备" -> "安装增强功能..."
 
 
-
-![](uploads/190828/20190828101413.jpg)
+![m7QZ4A.jpg](https://s2.ax1x.com/2019/08/28/m7QZ4A.jpg)
 
 等待一会虚拟机里面就会出现一个 "VBox" 开头的文件
 
-![](uploads/190828/20190828101607.jpg)
+
+![m7QVNd.jpg](https://s2.ax1x.com/2019/08/28/m7QVNd.jpg)
 
 看图标是灰色的，需要挂载到系统中
 
-![](uploads/190828/20190828102012.jpg)
+![m7MBtA.jpg](https://s2.ax1x.com/2019/08/28/m7MBtA.jpg)
 
 选择"挂载卷"
 
 挂载完之后，查看该文件的属性
 
-![](uploads/190828/20190828102158.jpg)
+
+![m7MJl6.jpg](https://s2.ax1x.com/2019/08/28/m7MJl6.jpg)
 
 从上图清楚文件夹的完整路径是 `/media/wa/VBox_GAs_6.0.8`
 
@@ -30,7 +33,6 @@
 
 执行ls 看看里面有什么文件，发现有`VBox_GAs_6.0.8` 这个文件夹，
 
-![](uploads/190828/20190828102607.jpg)
 
 ![mTeUzD.jpg](https://s2.ax1x.com/2019/08/28/mTeUzD.jpg)
 
@@ -47,7 +49,10 @@
 
 
 
-图床 [sm.sm](https://sm.sm)
+图床
+1. [sm.sm](https://sm.sm)
+2. [imgchr](https://imgchr.com)
+
 
 
 
