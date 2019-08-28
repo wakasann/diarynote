@@ -96,9 +96,10 @@ https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads
 
 1. 当提交图片上传的GitHub的仓库时，会给自己的Github帐号 添加无效的提交绿点
 
-而使用GitHub作为图床，对我来说的优点是：
+而使用GitHub作为图床，对我来说的好处是：
 
 1. 仓库中的图片路径 维护起来比较方便, 将同一个随笔发布到其它平台时，发布的速度会比较快
+2. 免费
 
 
 
