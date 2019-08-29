@@ -1,22 +1,22 @@
-windows vs2017 + opencv 环境搭建
+windows vs2019 + opencv 3.4.7环境搭建
 
 
 
-## Opencv 4.1
+## 安装Opencv 3.4.7
 
 ### 下载 Opencv
 
 第1步 进入 opencv [releases](https://opencv.org/releases/) 页面，点击 "Windows"的下载链接之后，会跳到 `sourceforge.net` 网站，等待6秒钟之后，浏览器就会自动开始下载,下载过程会稍微比较久，需要耐心等待。
 
-![](uploads/190829/20190829113203.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829113203.jpg)
 
-当下载完成之后，下一步，双击运行已下载好的 `opencv-3.4.7-vc14_vc15.exe`  ![](uploads/190829/20190829121416.jpg)文件,会询问解压存放的路径。解压即是安装
+当下载完成之后，下一步，双击运行已下载好的 `opencv-3.4.7-vc14_vc15.exe`  ![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829121416.jpg)文件,会询问解压存放的路径。解压即是安装
 
 **【建议】在英文路径下，不用有中文和空格**
 
 
 
-![](uploads/190829/20190829121929.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829121929.jpg)
 
 选择解压存放的文件夹就可以，因为OpenCV项目文件打包的时候，根目录就是`opencv`，所以我们不需要额外的新建一个名为opencv的文件夹。
 
@@ -26,19 +26,19 @@ windows vs2017 + opencv 环境搭建
 
 ### 设置环境变量
 
-![](uploads/190829/20190829140454.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829140454.jpg)
 
-![](uploads/190829/20190829140759.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829140759.jpg)
 
 把之前解压（安装）好的OpenCV路径下的bin路径添加到Path系统环境变量中。
 
 如我存放的路径是"E:\develop\opencv\build\x64\vc15\bin"
 
-![](uploads/190829/20190829141119.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829141119.jpg)
 
 在 编辑 环境变量窗口中 填入路径，然后 "确认" 就会关闭 "编辑环境变量"的窗口
 
-![](uploads/190829/20190829141212.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829141212.jpg)
 
 
 
@@ -52,11 +52,11 @@ windows vs2017 + opencv 环境搭建
 
 Visual Studio 网站 [https://visualstudio.microsoft.com/zh-hans](https://visualstudio.microsoft.com/zh-hans)
 
-![](uploads/190829/20190829114555.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829114555.jpg)
 
 选择社区版就行，安装过程很简单，一直下一步就行。
 
-![](uploads/190829/20190829115152.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829115152.jpg)
 
 当运行已下载的 `vs_community.exe` 文件时，跳出安装的选择项，上图是我选择的，仅供参考，然后 点击"安装"就可以了。
 
@@ -65,13 +65,13 @@ Visual Studio 网站 [https://visualstudio.microsoft.com/zh-hans](https://visual
 1. 新建项目
 因为我是新安装的 vs 2019,所以入口是这样的，可以通过快捷键 `Ctrl+Shift+N` 来快速创建新项目
 
-![](uploads/190829/20190829141828.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829141828.jpg)
 
-![](uploads/190829/20190829141901.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829141901.jpg)
 
 
 
-![](uploads/190829/20190829142022.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829142022.jpg)
 
 2. 新建一个cpp文件
 
@@ -79,20 +79,20 @@ Visual Studio 网站 [https://visualstudio.microsoft.com/zh-hans](https://visual
 
 新建cpp文件
 
-![](uploads/190829/20190829142454.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829142454.jpg)
 
 
-![](uploads/190829/20190829142712.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829142712.jpg)
 
 保存新建的cpp文件
 
-![](uploads/190829/20190829142848.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829142848.jpg)
 
 将已保存的cpp 添加的 "源文件"中
 
-![](uploads/190829/20190829143527.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/20190829143527.jpg)
 
-![](uploads/190829/fsScreenShot00001q.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fsScreenShot00001q.jpg)
 
 
 
@@ -102,22 +102,22 @@ Visual Studio 网站 [https://visualstudio.microsoft.com/zh-hans](https://visual
 
 通过菜单 "视图" -> "其它窗口" -> "属性管理器"
 
-![](uploads/190829/fs2019082900001J.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs2019082900001J.jpg)
 
 下一步，在打开的属性管理器的"Debug | x64" 右键，弹出的菜单选择"属性(R)"
 
-![](uploads/190829/fs2019082900002r.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs2019082900002r.jpg)
 
 下一步添加包含目录，`VC++ 目录` -> `包含目录`-> 选择编辑
 
-![](uploads/190829/fs2019082900003i.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs2019082900003i.jpg)
 
 
 
 添加。 点下面图中箭头指的图标，把以下路径添加 
 （P.S.即之前解压（安装）好的OpenCV路径下的`build`文件夹）
 
-![](uploads/190829/fs2019082900004f.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs2019082900004f.jpg)
 
 
 
@@ -125,11 +125,11 @@ Visual Studio 网站 [https://visualstudio.microsoft.com/zh-hans](https://visual
 
 (ps. 即之前解压（安装）好的OpenCV路径下的 运行位数下的`lib`)
 
-![](uploads/190829/fs2019082900005X.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs2019082900005X.jpg)
 
 
 
-![](uploads/190829/fs2019082900006r.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs2019082900006r.jpg)
 
 
 
@@ -137,13 +137,25 @@ Visual Studio 网站 [https://visualstudio.microsoft.com/zh-hans](https://visual
 
 `链接器` -> `输入` -> `附加依赖项 `
 
-![](uploads/190829/fs2019082900007e.jpg)
+在上一步设定的lib文件夹中找到.lib文件：
+
+![](uploads/190829/fs2019082900010n.jpg)
 
 
 
-手动敲入 `opencv_world347d.lib`
+可以看到 对应的2个 lib文件，知道2个lib的名字之后
 
-![](uploads/190829/fs20190829000085.jpg)
+
+
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs2019082900007e.jpg)
+
+
+
+不要直接复制名称进去，要**手动**敲入 `opencv_world347d.lib` 到`附加依赖项`的输入框中
+
+
+
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs20190829000085.jpg)
 
 注意:
 
@@ -172,8 +184,7 @@ int main()
 
 运行效果:
 
-![](uploads/190829/fs2019082900009I.jpg)
-
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190829/fs2019082900009I.jpg)
 
 
 

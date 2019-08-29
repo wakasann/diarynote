@@ -112,6 +112,16 @@ https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads
 
 
 
+----
+
+从 [使用gitee做图床](https://www.youngxj.cn/566.html) 文章中，学习到：
+1. gitee 没有cdn加速缓存
+2. 获取 gitee 上仓库的图片外链，格式是 `https://gitee.com/用户名/项目名/blob/master/123.jpg`中的`blob`修改成`raw`再访问，就可以了得到一张图片外链了。
+
+如:`https://gitee.com/mrshenyuan/diarynote/raw/master/draft/uploads/190828/20190828165503.jpg`
+![](https://gitee.com/mrshenyuan/diarynote/raw/master/draft/uploads/190828/20190828165503.jpg)
+
+
 
 ###### References
 
@@ -119,3 +129,5 @@ https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads
 2. [Github做图床](https://www.jianshu.com/p/d51258ef5484)
 3. [github做Markdown图床](https://www.jianshu.com/p/33eeacac3344)
 4. [图床工具的使用---PicGo](https://www.jianshu.com/p/9d91355e8418)
+5. [使用gitee做图床](https://www.youngxj.cn/566.html) 
+
