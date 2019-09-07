@@ -139,33 +139,11 @@ PowerDesigner 15设置mysql主键自动增长及基数 http://blog.csdn.net/code
 
 ## 180130
 1. laravel multi auth https://stackoverflow.com/questions/34614753/can-anyone-explain-laravel-5-2-multi-auth-with-example
-2. redmine edit issue description http://www.redmine.org/projects/redmine/wiki/RedmineIssues#Editing-an-existing-issue
-3. redmine roles wiki http://www.redmine.org/projects/redmine/wiki/RedmineRoles
-4. redmine gitlab 整合 https://docs.gitlab.com/ce/user/project/integrations/redmine.html
-5. gitlab redmine http://toritori0318.hatenadiary.jp/entry/20140620/1403287430
 6. https://gitlab.com/gitlab-org/gitlab-ce/issues/14806  Visibility level visibilitylevel|public is not allowed in a visibilitylevel|private group.
 7. linux su auth fail  https://askubuntu.com/questions/446570/why-does-su-fail-with-authentication-error sudo -i
-8. gitlab redmine 提交 http://blog.dksg.jp/2015/05/redminegitlabpushstatus.html
 9. https://stackoverflow.com/questions/45474191/an-error-occurred-while-installing-mysql2-0-4-8-and-bundler-cannot-continue
 10. get jwt payload data https://stackoverflow.com/questions/40435842/custom-payload-with-laravel-jwt
 11. 重置密码 http://www.ghostchina.com/how-to-reset-mysqls-root-password/
-12. bitnami redmine restore https://docs.bitnami.com/virtual-machine/components/mysql/#how-to-restore-a-database-backup
-13. reset password http://www.ghostchina.com/how-to-reset-mysqls-root-password/
-
-sh /opt/redmine-3.4.4-1/ctlscript.sh restart
-
-sh /opt/redmine-3.4.4-1/ctlscript.sh restart mysql
-
-/opt/redmine-3.4.4-1/ruby/bin/bundle install --path vendor/bundle
-
-/opt/redmine-3.4.4-1/ruby/bin/bundle install --path vendor/bundle
-
-
-sudo /opt/redmine-3.4.4-1/mysql/bin/mysqld_safe --pid-file=/opt/redmine-3.4.4-1/mysql/data/mysqld.pid --datadir=/opt/redmine-3.4.4-1/mysql/data --init-file=/home/test/mysql-init 2> /dev/null &
-
-
-/opt/redmine-3.4.4-1/mysql/bin/mysqldump -A -u root -p > backup.sql
-
 
 update user set password=PASSWORD("123456") where User='root';  
 

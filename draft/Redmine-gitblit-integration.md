@@ -22,8 +22,10 @@ Git 仓库: Gitbilt V1.8.0
 ![](uploads/190904/fs2019090400002e.jpg)
 
 1. 访问地址
-2. redmine 默认的登录的用户名和密码
+2. redmine 默认的登录的用户名和密码，redmine默认的登录密码也是 mysql `root` 用户的密码 [Obtain MySQL Credentials](https://docs.bitnami.com/virtual-machine/apps/redmine/get-started/find-credentials-link-mysql/)
 3. 访问控制台(ssh)的默认用户名和密码
+
+
 
 **注**: 如果 运行`ifconfig` 命令，提示`ifconfig`命令找不到，可以尝试运行`sudo ifconfig`
 
@@ -120,17 +122,31 @@ crontab -e
 sudo service cron restart
 ```
 
-最后在 Redmine中，看到 仓库的更新记录
+最后在 Redmine中，看到 仓库的更新记录，如果有新提到远程仓库，5分钟之后，会通过定时任务自动拉取提交的记录
 
 ------
 
 ### 其它 Redmine和GitBilt 集成
 
-1. 在管理，版本库，开启 Web Service,并生成key
+1. 在管理，版本库，开启 Web Service,并生成key 和 对Readmine的通知
 
 
 
 ![](uploads/190904/fs20190904000103.jpg)
+
+![](uploads/190904/fs2019090700004F.jpg)
+
+
+| 跟踪标签 | 用于解决问题的关键字 | 应用后的状态 | % 完成 |
+| -------- | -------------------- | ------------ | ------ |
+| 全部     | fixes,fixed          | Resolved     | 80%    |
+| 全部     | closes,closed        | Closed       | 100%   |
+| 全部     | developing,doing     | In Progress  | 20%    |
+
+
+
+
+
 
 2. 开启 Readmine的API
 
@@ -249,14 +265,32 @@ new URL(triggerURL).getContent()
 
 ![](uploads/190904/fs2019090500009W.jpg)
 
+------
+### bitnami  redmine 程序的命令备忘
 
+```
+sh /opt/redmine-3.4.4-1/ctlscript.sh restart
+
+sh /opt/redmine-3.4.4-1/ctlscript.sh restart mysql
+
+/opt/redmine-3.4.4-1/ruby/bin/bundle install --path vendor/bundle
+
+sudo /opt/redmine-3.4.4-1/mysql/bin/mysqld_safe --pid-file=/opt/redmine-3.4.4-1/mysql/data/mysqld.pid --datadir=/opt/redmine-3.4.4-1/mysql/data --init-file=/home/test/mysql-init 2> /dev/null &
+
+
+/opt/redmine-3.4.4-1/mysql/bin/mysqldump -A -u root -p > backup.sql
+```
 
 ##### References
 
-1. [Debian9 ifconfig命令找不到解决办法](https://www.cnblogs.com/pipci/p/9634060.html)
-
+1. [Debian9 ifconfig命令找不到解决办法](https://www.cnblogs.com/pipci/p/9634060.html) 学习到 `ifconfig` 命令是属于`nettools`软件的
 2. [redmine集成git](https://www.cnblogs.com/chencidi/p/9111054.html)
-
 3. [redmine整合gitlab版本库](https://blog.csdn.net/danqingc/article/details/88035876) 学习到给仓库存放文件夹的拥有者为apache用户和分配权限，最后 定时任务 更新仓库成功啦
-
 4. [Hook redmine git repository via gitblit](https://budiadiono.wordpress.com/2012/03/28/hook-redmine-git-repository-via-gitblit/) 我安装使用的Redmine已经有自带`redmine-fetch.groovy` 文件，所以不需要按文章中介绍的编辑 groovy文件
+5. [RedmineとGitLabの連携。PushでチケットのStatusを変更](https://blog.dksg.jp/2015/05/redminegitlabpushstatus.html) gitlab 和 redmine 整合
+9. [redmine edit issue description](http://www.redmine.org/projects/redmine/wiki/RedmineIssues#Editing-an-existing-issue)
+7. [redmine roles wiki](http://www.redmine.org/projects/redmine/wiki/RedmineRoles)
+8. [redmine gitlab 整合](https://docs.gitlab.com/ce/user/project/integrations/redmine.html)
+9. [Visibility level visibilitylevel|public is not allowed in a visibilitylevel|private group.](https://gitlab.com/gitlab-org/gitlab-ce/issues/14806)  
+10. [GitLabとRedmineを連携してみるの巻](http://toritori0318.hatenadiary.jp/entry/20140620/1403287430)
+11. [Create And Restore Application Backups](https://docs.bitnami.com/virtual-machine/apps/redmine/administration/backup-restore/) redmine创建和还原应用程序备份
