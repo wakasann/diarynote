@@ -10,7 +10,7 @@ bitnami 因为安全考虑，只能 localhost 访问 phpmyadmin
 
 如果你已经在SSH 客户端配置过了，并且你已经确认是可以通过SSH成功访问你的SSH实例,为了能访问phpMyAdmin 你需要创建一个SSH隧道.跟着这些的步骤
 
-![](uploads/190905/fs20190907000057.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190905/fs20190907000057.jpg)
 
 **注:** 如上图，在"Session"中，可以看到一个名字叫 已经配置成功的"redmine" 会话，然后点击"Load",上面的 主机地址和端口会根据保存的SSH信息重新赋值
 
@@ -20,7 +20,7 @@ bitnami 因为安全考虑，只能 localhost 访问 phpmyadmin
     * Source port: 8888
     * Destination: localhost:80
 
-![](uploads/190905/fs2019090700006i.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190905/fs2019090700006i.jpg)
 
 记住，如果你http重定向访问HTTPS端口，你必须使用 443 端口代替 80端口。
 
@@ -44,11 +44,11 @@ bitnami 因为安全考虑，只能 localhost 访问 phpmyadmin
 
 这应该是你会看到的一个举例:
 
-![](uploads/190905/fs20190907000082.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190905/fs20190907000082.jpg)
 
 如果你不能访问 phpMyAdmin,通过检查 PuTTY 的日志文件验证已经创建的SSH 隧道
 
-![](uploads/190905/fs2019090700009L.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190905/fs2019090700009L.jpg)
 
 Session 里面的Logging 的节点， Session logging为不是"None"
 
@@ -58,7 +58,7 @@ Session 里面的Logging 的节点， Session logging为不是"None"
 
 打开putty的日志，可以看到类似下面"Event Log:"开头的记录:
 
-![](uploads/190905/fs2019090700010r.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190905/fs2019090700010r.jpg)
 
 
 

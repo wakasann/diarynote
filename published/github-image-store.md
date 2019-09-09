@@ -2,6 +2,8 @@
 
 ## 前提
 
+本文前提:## 前提
+
 本文前提:
 
 1. 我个人博客的草稿是存放在 github上的一个仓库 [diarynote](https://github.com/wakasann/diarynote)
@@ -15,6 +17,10 @@
 
 
 从上面的描述可以知道，我自己的一个项目仓库的一个文件夹在 GitHub的 的路径固定是 [https://github.com/wakasann/diarynote/tree/master/draft/](https://github.com/wakasann/diarynote/tree/master/draft/)
+
+github 图片的的路径格式 `https://raw.githubusercontent.com/用户名/仓库名/分支名称/文件夹名称或者直接文件名称`
+
+如上面的仓库其中图片的路径是: `https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads`
 
 当我使用`Typora`工具在本地编写当前仓库的Markdown 图片路径一般都会写成
 
@@ -33,7 +39,7 @@
 查找
 
 ```
-uploads
+(uploads
 ```
 
 
@@ -41,8 +47,10 @@ uploads
 替换为
 
 ```
-https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads
+(https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads
 ```
+
+前面加`(`避免出现举例的图片路径和实际图片一样，给替换了
 
 ------
 
@@ -130,4 +138,3 @@ https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads
 3. [github做Markdown图床](https://www.jianshu.com/p/33eeacac3344)
 4. [图床工具的使用---PicGo](https://www.jianshu.com/p/9d91355e8418)
 5. [使用gitee做图床](https://www.youngxj.cn/566.html) 
-

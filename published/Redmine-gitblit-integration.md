@@ -19,7 +19,7 @@ Git 仓库: Gitbilt V1.8.0
 
 启动虚拟机之后，开机完成之后，会出现
 
-![](uploads/190904/fs2019090400002e.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090400002e.jpg)
 
 1. 访问地址
 2. redmine 默认的登录的用户名和密码，redmine默认的登录密码也是 mysql `root` 用户的密码 [Obtain MySQL Credentials](https://docs.bitnami.com/virtual-machine/apps/redmine/get-started/find-credentials-link-mysql/)
@@ -66,21 +66,21 @@ bitnami@debian:~/gitrepos$ sudo -u www-data -H git clone --mirror git://192.168.
 
 1. 查看 Git 是否可用
 
-![](uploads/190904/fs2019090400003y.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090400003y.jpg)
 
 2. 给项目新建版本库
 
-![](uploads/190904/fs20190904000045.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs20190904000045.jpg)
 
-![](uploads/190904/fs2019090400006o.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090400006o.jpg)
 
 修正: 库路径结尾没有`.git` ，因为上面已经取了别名是`test`
 
 查看是否能正常显示源码
 
-![](uploads/190904/fs20190904000078.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs20190904000078.jpg)
 
-![](uploads/190904/fs2019090400008s.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090400008s.jpg)
 
 从上图可以看到，成功显示源码和提交历史。如果开始是一个空仓库，可能会提示类似"该目录下没有条目或者文件"
 
@@ -98,7 +98,7 @@ cd /home/bitnami/gitrepos/test && sudo -u www-data -H git fetch
 
 保存之后，尝试运行脚本，运行成功，
 
-![](uploads/190904/fs2019090400009Q.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090400009Q.jpg)
 
 下一步将定时每5分钟运行这个脚本
 
@@ -132,9 +132,9 @@ sudo service cron restart
 
 
 
-![](uploads/190904/fs20190904000103.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs20190904000103.jpg)
 
-![](uploads/190904/fs2019090700004F.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090700004F.jpg)
 
 
 | 跟踪标签 | 用于解决问题的关键字 | 应用后的状态 | % 完成 |
@@ -150,7 +150,7 @@ sudo service cron restart
 
 2. 开启 Readmine的API
 
-   ![](uploads/190904/fs2019090500006g.jpg)
+   ![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090500006g.jpg)
 API选项卡 里面的两个都勾选
 
 3. 修改Gitbilt 配置文件
@@ -253,17 +253,17 @@ new URL(triggerURL).getContent()
 
 下一步，在 版本库列表，进入仓库 `test`详情页，点击右上角的 "编辑"按钮
 
-![](uploads/190904/fs2019090500007o.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090500007o.jpg)
 
 
 
 进入编辑页面之后，选择`receive` 选项卡，进入`Receive 设置`页面
 
-![](uploads/190904/fs2019090500008U.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090500008U.jpg)
 
 最后 给 `test`仓库推送提交，GitBilt的命令窗口显示，请求Redmine的Api地址成功
 
-![](uploads/190904/fs2019090500009W.jpg)
+![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190904/fs2019090500009W.jpg)
 
 ------
 ### bitnami  redmine 程序的命令备忘

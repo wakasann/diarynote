@@ -53,7 +53,7 @@ if(!function_exists('get_real_ip')){
 /**
 * 每天凌晨需要初始化文件緩存
 */
-class Init_daily_cache extends MY_Controller {
+class Init_daily_cache extends CI_Controller {
 
 	public function index(){
 	    if(is_cli()){
