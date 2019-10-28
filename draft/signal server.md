@@ -5,82 +5,18 @@ signal server一次尝试记录
 1. 安装好 mvn
 2. Ubuntu 16.04
 
-```
-sudo apt-get update
-# install java
-sudo apt-get install default-jdk
-#删除为了满足其他软件包的依赖而安装的，但现在不再需要的软件包。
-sudo apt autoremove
-sudo apt-get install default-jre
-java –version
-sudo apt install openjdk-8-jdk
-#如果需要使用其它jdk版本，可用这个进行切换
-sudo update-alternatives --config java
-```
 
 
-
-在另外一台虚拟机Ubuntu 16.04,JDK 我切换到 oracle jdk11
-
-```
-# 卸载之前安装的jdk
-sudo apt-get autoremove default-jdk
-sudo apt-get autoremove default-jre
-sudo apt-get autoremove openjdk-8-jdk
-
-# 安装 jdk11
-sudo add-apt-repository ppa:linuxuprising/java
-sudo apt-get update
-sudo apt-get install oracle-java11-installer-local #如果这一步遇到类似以下的问题，可以去其它网站下载响应的文件
-
-
-
-```
-
-
-
-````
-waka@ubuntus1:~/Signal-Server$ sudo apt-get remove oracle-java11-set-default-local
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-Package 'oracle-java11-set-default-local' is not installed, so not removed
-0 upgraded, 0 newly installed, 0 to remove and 133 not upgraded.
-1 not fully installed or removed.
-After this operation, 0 B of additional disk space will be used.
-Setting up oracle-java11-installer-local (11.0.4-1~linuxuprising1) ...
-Before installing this package,
-please download the Oracle JDK 11 .tar.gz file
-with the same version as this package (version 11.0.4),
-and place it in /var/cache/oracle-jdk11-installer-local,
-
-E.g.:
-sudo mkdir -p /var/cache/oracle-jdk11-installer-local
-sudo cp jdk-11.0.4_linux-x64_bin.tar.gz /var/cache/oracle-jdk11-installer-local/
-sha256sum mismatch jdk-11.0.4_linux-x64_bin.tar.gz
-Oracle JDK 11 is NOT installed.
-dpkg: error processing package oracle-java11-installer-local (--configure):
- subprocess installed post-installation script returned error exit status 1
-Errors were encountered while processing:
- oracle-java11-installer-local
-E: Sub-process /usr/bin/dpkg returned an error code (1)
-````
-
-
+## JDK
 
 我是从 [oracle jdk 11 lts download](https://blog.forsre.com/)  网站，复制`jdk-11.0.4_linux-x64_bin.tar.gz`的链接
 
 
-
 ```
-cd /tmp
 wget https://blog.forsre.com/java/jdk-11.0.4_linux-x64_bin.tar.gz
-sudo mkdir -p /var/cache/oracle-jdk11-installer-local
-sudo cp jdk-11.0.4_linux-x64_bin.tar.gz /var/cache/oracle-jdk11-installer-local/
-sudo apt-get install oracle-java11-installer-local #进行安装
+sudo mkdir /usr/lib/jvm
+sudo tar zxvf ./jdk-11.0.4_linux-x64_bin.tar.gz  -C /usr/lib/jvm
 ```
-
-
 
 配置环境变量
 
@@ -92,7 +28,7 @@ vim ~/.bashrc
 
 ```
 export JAVA_HOME=/usr/lib/jvm/java-11-oracle
-export PATH=$JAVA_HOME/bin:$PATH
+export PATH=${JAVA_HOME}/bin:$PATH
 ```
 
 
@@ -100,22 +36,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 ```
 source ~/.bashrc
 java -version
-```
-
-添加多一个文件
-
-```
-vim /etc/profile.d/apache-maven.sh
-```
-
-内容为:
-
-```
-export JAVA_HOME=/usr/lib/jvm/java-11-oracle
-export MAVEN_HOME=/home/waka/env/maven
-export M2_HOME=/home/waka/env/maven
-export PATH=${M2_HOME}/bin:${PATH}
-
 ```
 
 
@@ -150,7 +70,7 @@ createdb messagedb
 createuser --interactive
 # Enter name of role to add: Signal
 psql
-ALTER USER "Signal" WITH PASSWORD 'Signal!!';
+ALTER USER "Signal" WITH PASSWORD 'thepassword';
 #quit
 \q
 ```
@@ -180,7 +100,7 @@ host all all * md5
 最后重启电脑或者重启你的DBMS
 
 ```
-invoke-rc.d postgresql restart
+sudo invoke-rc.d postgresql restart
 ```
 
 ## maven 安装
@@ -210,7 +130,7 @@ sudo vim /etc/profile
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export MAVEN_HOME=/home/wa/env/maven
 export M2_HOME=/home/wa/env/maven
-export PATH=${M2_HOME}/bin:${PATH}
+export PATH=${JAVA_HOME}/bin:${M2_HOME}/bin:${PATH}
 ```
 
 重启电脑或者重新加载 `/etc/profile`的配置
@@ -231,6 +151,22 @@ source: source 文件名 [参数]
     退出状态：
     返回 FILENAME 文件中最后一个命令的状态；如果 FILENAME 文件不可读则失败。
 ```
+
+添加多一个文件`apache-maven.sh`，用于编译时使用
+
+```
+vim /etc/profile.d/apache-maven.sh
+```
+
+内容为:
+
+```
+export JAVA_HOME=/usr/lib/jvm/java-11-oracle
+export MAVEN_HOME=/home/waka/env/maven
+export M2_HOME=/home/waka/env/maven
+export PATH=${JAVA_HOME}/bin:${M2_HOME}/bin:${PATH}
+```
+
 
 验证 maven 配置成功
 
@@ -334,6 +270,8 @@ sudo docker run -p 9000:9000 --name minio1 \
 ```
 java -jar service/target/TextSecureServer-2.55.jar  messagedb migrate service/config/Signal.yml
 java -jar service/target/TextSecureServer-2.55.jar  accountdb migrate service/config/Signal.yml
+
+java -jar websocket-resources/target/websocket-resources-2.55.jar
 ```
 
 
@@ -568,6 +506,92 @@ websocket
 ```
 mvn clean install -DskipTests
 mvn install:install-file -Dfile=./target/websocket-resources-2.55.jar -DgroupId=org.whispersystems -DartifactId=websocket-resources -Dversion=1.0 -Dpackaging=jar
+```
+
+
+## 命令草稿
+
+```
+sudo apt-get update
+# install java
+sudo apt-get install default-jdk
+#删除为了满足其他软件包的依赖而安装的，但现在不再需要的软件包。
+sudo apt autoremove
+sudo apt-get install default-jre
+java –version
+sudo apt install openjdk-8-jdk
+#如果需要使用其它jdk版本，可用这个进行切换
+sudo update-alternatives --config java
+```
+
+
+
+在另外一台虚拟机Ubuntu 16.04,JDK 我切换到 oracle jdk11
+
+```
+# 卸载之前安装的jdk
+sudo apt-get autoremove default-jdk
+sudo apt-get autoremove default-jre
+sudo apt-get autoremove openjdk-8-jdk
+
+# 安装 jdk11
+sudo add-apt-repository ppa:linuxuprising/java
+sudo apt-get update
+sudo apt-get install oracle-java11-installer-local #如果这一步遇到类似以下的问题，可以去其它网站下载响应的文件
+sudo add-apt-repository  -r ppa:linuxuprising/java
+```
+
+
+
+通过 [ppa 网站](https://launchpad.net/~linuxuprising/+archive/ubuntu/java/+packages?field.name_filter=&field.status_filter=published&field.series_filter=xenial ) 发现安装 java11，我在 10月25日尝试，发现版本由 `java_11.0.4` 改为 `java_11.0.5`，故安装失败了，我是直接解压 jdk的下载包，然后将 JAVA,Maven 配置到环境变量镜像进行使用的
+
+
+
+````
+waka@ubuntus1:~/Signal-Server$ sudo apt-get remove oracle-java11-set-default-local
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'oracle-java11-set-default-local' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 133 not upgraded.
+1 not fully installed or removed.
+After this operation, 0 B of additional disk space will be used.
+Setting up oracle-java11-installer-local (11.0.4-1~linuxuprising1) ...
+Before installing this package,
+please download the Oracle JDK 11 .tar.gz file
+with the same version as this package (version 11.0.4),
+and place it in /var/cache/oracle-jdk11-installer-local,
+
+E.g.:
+sudo mkdir -p /var/cache/oracle-jdk11-installer-local
+sudo cp jdk-11.0.4_linux-x64_bin.tar.gz /var/cache/oracle-jdk11-installer-local/
+sha256sum mismatch jdk-11.0.4_linux-x64_bin.tar.gz
+Oracle JDK 11 is NOT installed.
+dpkg: error processing package oracle-java11-installer-local (--configure):
+ subprocess installed post-installation script returned error exit status 1
+Errors were encountered while processing:
+ oracle-java11-installer-local
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+````
+
+如何 `apt-get install` 一直提示上面的错误信息，可以通过下面的命令进行卸载安装的`oracle-java11-installer-local`
+
+```
+sudo apt-get auto-remove oracle-java11-installer-local
+```
+
+
+
+我是从 [oracle jdk 11 lts download](https://blog.forsre.com/)  网站，复制`jdk-11.0.4_linux-x64_bin.tar.gz`的链接
+
+
+
+```
+cd /tmp
+wget https://blog.forsre.com/java/jdk-11.0.4_linux-x64_bin.tar.gz
+sudo mkdir -p /var/cache/oracle-jdk11-installer-local
+sudo cp jdk-11.0.4_linux-x64_bin.tar.gz /var/cache/oracle-jdk11-installer-local/
+sudo apt-get install oracle-java11-installer-local #进行安装
 ```
 
 
