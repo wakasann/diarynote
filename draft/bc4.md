@@ -8,4 +8,5 @@ Beyond Compare 4
 
 删除这个路径下的所以文件
 
-![](https://raw.githubusercontent.com/wakasann/diarynote/master/draft/uploads/190814/20190814112535.png)
+![](uploads/190814/20190814112535.png)
+

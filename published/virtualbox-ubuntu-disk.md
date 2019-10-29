@@ -20,7 +20,8 @@ virtualbox ubuntu 磁盘大小扩容
 
 1. 在virtualbox 启动已扩大容量的虚拟机系统，找到`Disks`(`磁盘`)，如果没有，可通过`sudo apt-get install gnome-disk-utility` 命令来安装这个软件,启动`Disks`软件之后
 2. 选择`Hard Disk`(`磁盘`)，点击在`Volumes`(`卷(V)`)下面的按钮组中带有`齿轮`图标的按钮，在弹出的菜单中，选择 `Resize...`(`调整大小...`)
-    ![](images/191009/fs2019100900001U.jpg)
+    ![images/191009/fs2019100900001U.jpg](https://i.loli.net/2019/10/29/43MwfTxtI8Q5WbC.jpg)
+
 3. 在弹出的`Resize Volume`(`调整卷大小`)的窗口，拖动 滚动条来进行调整大小，确认 调整之后，最后点击红色的`Resize`(`调整大小`)的按钮之后，虚拟机中磁盘的大小就 已经调整好了 :smile:
 
 ------

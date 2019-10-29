@@ -76,10 +76,9 @@ Bookmarks file path(书签地址)的值填写你刚才创建的`文件夹/bookma
 
 书签的目录直接选择**根目录**就可以了，如果新建的话他是在你现在浏览器书签基础上新建一个同步的书签文件夹。
 
-![](D:\workspace\note\diarynote\draft\uploads\191028\fs2019102800003V.jpg)
+![uploads/191028/fs2019102800003V.jpg](https://i.loli.net/2019/10/29/IhVqN1k2XJuvOoa.jpg)
 
-![](D:\workspace\note\diarynote\draft\uploads\191028\fs2019102800004h.jpg)
-
+![uploads/191028/fs2019102800004h.jpg](https://i.loli.net/2019/10/29/JEalITNvckndueh.jpg)
 
 
 配置好了点击一次同步，就会先把你浏览器上所有书签同步到坚果云。然后你去另外的浏览器上同步就会把坚果云的和你本地的合并，设置里可以设置重新导入，不过建议是新浏览器里直接清空书签了再进行同步。

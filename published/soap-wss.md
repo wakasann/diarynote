@@ -1,4 +1,4 @@
-SOAPUI WSS header
+使用SOAPui 笔记 
 
 
 对接Oracle Fusion Application的SOAP. 遇到
@@ -21,10 +21,9 @@ SOAPUI WSS header
 
 > Information about the web services provided by Fusion Applications is hosted in [Oracle Enterprise Repository (OER)](https://www.oracle.com/webfolder/technetwork/docs/HTML/oer-redirect.html). The information provided by OER can be used to understand the functionality provided by the service and how the service can be called.
 
-## 先决条件
-已安装了 SOAPUI
 
-##
+
+我个人发布在RTD的文档: [SOAPUI GUIDE](https://integrating-soapui-fusion.readthedocs.io/index.html)
 
 
 

@@ -431,10 +431,11 @@ search api
 * URL Search 使用 `q`
 * Request Body search 
 
+```
 /_search
 
 /index1/_search
-
+```
 
 
 -----

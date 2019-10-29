@@ -8,7 +8,8 @@ Eclipse导入的Maven项目没有Build Path
 
 在 项目右键 -> Properties  -> Project Facets  ->Convert to faceted from..--->勾选Java
 
-![](images/191012/fs20191012000017.jpg)
+![images/191012/fs20191012000017.jpg](https://i.loli.net/2019/10/29/FEIYvaDLczhyq3e.jpg)
+
 
 2. 在项目中新建或者编辑`.classpath`文件
 
@@ -48,8 +49,7 @@ Eclipse导入的Maven项目没有Build Path
 
 在 `Project Explorer` 或者 `Package Explorer` 右边有个小箭头的图标，可以调整 项目中 包 显示的方式，操作如下图:
 
-
-![](images/191012/fs2019101200002V.jpg)
+![images/191012/fs2019101200002V.jpg](https://i.loli.net/2019/10/29/Ni2VmHJrE8aecBt.jpg)
 
 注: 好像java项目右键之后弹出的菜单`build path`不是灰色的，切换包的才有效果 :smile:
 

@@ -1,4 +1,4 @@
-signal server一次尝试记录
+在虚拟机中使用maven编译signal server项目记录
 
 ## 前言
 
@@ -333,12 +333,12 @@ openssl rsa -in fd.key -pubout -out fd-public.key
 
 ```
 twilio: # Twilio gateway configuration
-  accountId: AC6b5d059a5df8ac08af904e46b68ed995 #fake
-  accountToken: d1ec5b0c74593aaffdcc7bde533a04f2 #fake
+  accountId: ddd #fake
+  accountToken: aaa #fake
   numbers:  # Numbers allocated in Twilio
-    - "+12055768747" #fake
+    - "+121020222" #fake
   messagingServicesId: 
-  localDomain: 192.168.1.168 # Domain Twilio can connect back to for calls. Should be domain of your service.
+  localDomain:  # Domain Twilio can connect back to for calls. Should be domain of your service.
 
 push:
   queueSize: 200 # Size of push pending queue
@@ -428,53 +428,6 @@ pushScheduler:
   url: "redis://localhost:6379/7"
   replicaUrls: 
     - "redis://localhost:6379/8"
-
-unidentifiedDelivery:
-  privateKey: "-----BEGIN RSA PRIVATE KEY-----
-Proc-Type: 4,ENCRYPTED
-DEK-Info: AES-128-CBC,F9B307A12596523AA92357E3949FD460
-
-09PzH4NPCtX84HHhF80ss4RxFfzT8M/xazs5RIHRQyZwneusKtWxSIqU3taxNiIp
-rUgYIC0rSnVNGU14PDqSUMBvav39JxncIAw63GNDuBIUovg0bddC6JSYF80c9vJV
-0vkG1lAeGQfkaGOXn8GysvuEC62xmKkh7HkCmdVE2yXFy8wf3vvqgmJ5iZcdD/HE
-sMzDRu8Ddve57zTiEZhYbyA0bdyTO+A4Oo/d0gjqBrWY/P879f00ioLOl0kxKZln
-jLLgXR1zY/8cu/MtQR5CXTPFwBOE/FVE3hZduWBf2/DuJUwVnfyqmvkm4hQfbkdE
-9hl8NZxD0eTm2jQOZoO//4mJTtrwt2LQJ3ITD2JfmwjlPxewGQI8j6Weq6kgi9tN
-Upf8iNki2LuLaYLZICmQQM8uwu9WAzjG/Mq/BKCPcWHce4B/YdnrdZuTseRfdqvV
-tk2utXM9KTXu1LU9P4TdSJ12ibqXI8oMA5SnkNhP/Z8OZ142OqQI0hq1hdL0yXyo
-YaaYnhEKi+LQNUPqtSijWG/5tpSUuo7sKjbAIT3pRajvWVF2Ewat5RzhgdrIdYKe
-0qKEpC0drPgfaJIR3EypiTAgQhESeL1GrWV6uaS/avJBayqS5ROIkEvzKRemFnEY
-fI5LqgDkNrPhY49g6yi4tz6+4cUTfxbnB4lhLm2bI1vbeDJ2wkDaD0jTft7tdZf7
-oFvyyphQM3D5T63Q6MY3A3JLXuV8A6/KYk7iZzGGON0F5/xZD/du8IvG+9rfgx7V
-inJsW9eA5YXIKplOa1ZXgov9p1YKw2BjbU/L0p809lgVwwX+A85eO6ZBdDFc2xXi
-gwuLlMn1/cKcYF8QrcPPyFvG8Oy8ok133pEWt3ednitUcKZiuj9PP2ECE7+o2GTp
-OSSDrEir4dgHmD46MK3HE3/OFLdK/gZXyDO46/eJ+7JFrUNW/pm38bCo4BABWumm
-e5IhYDOe5pH/HqVGJBsBNS0nP7MGbPDBBbwSInCRqBu5RabO+Ty40y5DE25KvQnS
-8ngl1mVte9nIv9cGgEzw3NbHXFY7GVpbgSbCAnfcw95T+KNmieccRY5UpP2op6s4
-dixPrrj136cIDPzVtx8m87xF+uCYRErGv3yWsNaWuODnb1UASjzDRU54kEDE1u/f
-Fd3C3vYTGfONwpu/owblygt2T4K00byafV47/qx1mxXVVNHhavkLDfUavsrqnLOn
-wMRQL4Evof0zlST/OL/wA6pNdd26Livnl+6E9wlOZ/9Rpi9J8KPJ3xJL3UUraDB4
-nQoPAqywaV3WDauZc3GvNTpxi5fXviBrz+xmtpoJkQrb8LDAcKGY5wHja2AutEzj
-8ZRkqu2GFa52hk7qdvy/LYKTqKgOulcIpPoa3FtY5JqRhLsPCYBwsgeD/E37gaVO
-VqsEhhIcsUWsH3UDo/YC3POa4cn0TVolcypnyRVCSshLhJkmQHJ5eEhRjRTisBtn
-tRU37LCYwbCPApsFLm8ppNr47z0gsJKINFTM0YrnIsfmGVadZEP648l9rSmf1hhH
-0NQz22trSTLMCRtdgeijgm248uWDRRPEB3CzYrInaDO+cnGEsLV1qCVjXqh7uBPA
------END RSA PRIVATE KEY-----"
-  certificate: "-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyengTimTzVEYLKCQ4qE1
-z1ME5MKVAMebj5/DkuwdPMuQHu1dUZoRQxDU1f8VUdrElfLXGTYUjHh4e4erpMxr
-CI7sHyn6ov8Gw+njOvN8IdgH7QlT8xyHeCKsxBl/WaUTy+lGU7CgrDdM+ZOiQODF
-F0JFx1yOU80Qln5FO5yFEw+DVeUnXgWMDpjoUTXC1GUICaGLaT64X1qgPykyjAbI
-kEUCw7PNV8RxIgWCd0JSEZmRlVhhfeSsgWCX6UFZubs/cATqsrXkQbLjHvEN0eNC
-+vzOWIlNEhRdn5cwPOpz9nxneMrMSxl1UvDf88ze2IFvE6V+82a0P0XcjtSRDd6V
-owIDAQAB
------END PUBLIC KEY-----"
-  expiresDays: 3650
-
-voiceVerification:
-  url: http://localhost
-  locales:
-    - zh
 ```
 
 
@@ -541,11 +494,13 @@ sudo apt-get install oracle-java11-installer-local #如果这一步遇到类似�
 sudo add-apt-repository  -r ppa:linuxuprising/java
 ```
 
-
+我是从 [oracle jdk 11 lts download](https://blog.forsre.com/)  网站，复制`jdk-11.0.4_linux-x64_bin.tar.gz`的链接
 
 通过 [ppa 网站](https://launchpad.net/~linuxuprising/+archive/ubuntu/java/+packages?field.name_filter=&field.status_filter=published&field.series_filter=xenial ) 发现安装 java11，我在 10月25日尝试，发现版本由 `java_11.0.4` 改为 `java_11.0.5`，故安装失败了，我是直接解压 jdk的下载包，然后将 JAVA,Maven 配置到环境变量镜像进行使用的
 
 
+
+~~命令~~:
 
 ````
 waka@ubuntus1:~/Signal-Server$ sudo apt-get remove oracle-java11-set-default-local
@@ -582,9 +537,11 @@ sudo apt-get auto-remove oracle-java11-installer-local
 
 
 
-我是从 [oracle jdk 11 lts download](https://blog.forsre.com/)  网站，复制`jdk-11.0.4_linux-x64_bin.tar.gz`的链接
 
 
+
+
+~~安装jdk 11 命令~~:
 
 ```
 cd /tmp

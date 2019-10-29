@@ -1,5 +1,7 @@
-wordpress 添加 显示磁盘剩余空间百分比
+wordpress 添加 显示磁盘剩余空间百分比的插件
 
+
+在 `wp-content/plugins` 文件夹下
 
 我取的文件名是: `folder-sizes-dashboard-widget.php`
 
@@ -233,7 +235,7 @@ $dt = my_custom_format_size($dt);
 
 
 
-##### References
+## References
 
 1. [Display Disk Free Space Percentage In PHP](http://www.thecave.info/display-disk-free-space-percentage-in-php/)
 2. [How to Check Disk Space used by Media Library](https://wordpress.stackexchange.com/a/71054)
