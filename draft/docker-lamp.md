@@ -1,12 +1,4 @@
-docker 按照的 lamp 笔记
-
-
-
-```
-
-```
-
-
+docker-ce 搭建的 lamp 开发环境笔记
 
 
 
@@ -26,8 +18,17 @@ mkdir -p ~/dockers/lamp/{app,mysql}
 cd ~/dockers/lamp
 
 # Launch a 18.04 based image
+# 容器需手动启动
 sudo docker run --name lamptest -p "80:80" -p "3306:3306" -p "443:443" -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql  wakasann/lamp:latest
+
+# 容器自启动
+sudo docker run --restart=always --name lamptest -p "80:80" -p "3306:3306" -p "443:443" -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql  wakasann/lamp:latest
+
 ```
+
+`--restart=always` 参数的值`always` 是容器停止之后，会进行重新启动
+
+
 php 7.3
 
 运行日志:
@@ -164,15 +165,106 @@ mcrypt.algorithms_dir => no value => no value
 mcrypt.modes_dir => no value => no value
 ```
 
+------
+
+1. 修改myql ` sql_mode`
+
+```
+#Form lamp docker
+vim /etc/mysql/my.cnf
+vim /etc/my.cnf
+```
+都在文件末尾添加以下内容:
+
+```
+[mysqld]
+sql_mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+#max_allowed_packet=100M
+```
+
+重启docker lamp容器之后,在 phpmyadmin 中
+
+```
+#phpmyadmin run sql
+show variables like 'sql_mode';
+```
+
+临时设置 `sql_mode`
+
+```
+#phpmyadmin run sql
+set global sql_mode='ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+```
+
+2. 修正 apache2 默认列出 `Indexs`
+
+```
+# Form docker
+vim /etc/apache2/sites-available/000-default.conf
+```
+
+将 `<Directory /var/www/html>` 的`Options Indexes FollowSymLinks MultiViews` 改为 `Options FollowSymLinks MultiViews`（移除 `Indexes`）
+
+按ESC键，输入`:wq`保存文件修改
+
+```
+# Form docker,restart apache2
+service apache2 restart
+```
+
+
+
+
 ## rsync note
 
 通过ssh的方式，将远程的文件同步到当前服务器的一个文件夹下
+
+将 远程的 `/home/vagrant/sh/` 文件放入到本机的`/home/vagrant/syncfrom155`文件夹中
 
 ```
 rsync -v -r -e ssh vagrant@192.168.1.155:/home/vagrant/sh/* /home/vagrant/syncfrom155
 ```
 
 
+
+## 补充 docker容器自启动
+
+```
+$ docker run --help
+...
+--restart string                 Restart policy to apply when a container exits (default "no")
+...
+```
+
+显示 docker run 命令的帮助信息
+
+因上面docker 命令启动 lamp 容器时，没有加`--restart=always` 参数
+
+```
+docker run --restart=always
+```
+
+如果已创建容器并已启动，可通过下面的命令进行添加:
+
+```
+docker update --restart=always <CONTAINER ID>
+```
+
+如果想容器在 `docker stop` 之后，不想让容器自启动，尝试通过
+
+```
+docker update --restart=no <CONTAINER ID>
+```
+
+
+
+
+
 ## References
+
 * [How to install mcrypt in php7.2 / php7.3](https://lukasmestan.com/install-mcrypt-extension-in-php7-2/)
+
 * [Rsync](https://www.jianshu.com/p/07b3998e1f53 )
+* [安装docker和docker的开机启动及容器的开机自启](https://blog.csdn.net/weixin_40760196/article/details/87926107) 了解到更新容器的参数部分，通过`docker update` 命令
+* [docker 用 restart=always 启动一个 Mysql 容器，现在想删除这个容器怎么破？](https://www.v2ex.com/t/552106) 对 已加`--restart=always`参数的容器 如何停止的讨论
+* [docker参数--restart=always的作用](https://www.cnblogs.com/kaishirenshi/p/10396446.html) 

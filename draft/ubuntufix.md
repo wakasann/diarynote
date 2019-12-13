@@ -1,28 +1,24 @@
-bash-cd-ssh-permission-denied
+使用ubuntu的一些操作笔记20191203
 
+## 前言
 
+环境: virtualbox + Ubuntu 16.04
 
-https://unix.stackexchange.com/a/146195
+情况: 
+* 可以进入虚拟机中Ubuntu系统的桌面，但是外部可以访问到 ssh，输入正确的用户名和密码无法登录
+* 无法正常启动 Apache
 
+最后解决方法是 增加一个新用户并分配为`sudoers`,然后外部可以通过ssh 方式可以登录进服务器中
 
+------
 
-ssh-error-permission-denied-please-try-again
-
-```
-su - username
-```
-
-
-
-https://serverfault.com/a/288237
-
-ubuntu su initgroups  Operation not permitted
+## Apache  无法启动的修复笔记
 
 ```
 apachectl configtest
 ```
 
-
+输出:
 
 ```
 AH00526: Syntax error on line 109 of /etc/apache2/apache2.conf:
@@ -51,7 +47,7 @@ export APACHE_RUN_USER=www-data2
 export APACHE_RUN_GROUP=www-data
 ```
 
-
+然后新增用户:
 
 ```
 # add a user name is www-data2
@@ -64,9 +60,11 @@ sudo usermod -a -G www-data
 sudo usermod -d /var/www www-data2
 ```
 
+新增完用户之后，然后重启 apache `sudo service apache2 restart`
 
+------
 
-
+apt install 过程中输出
 
 ```
 WARN: /etc is world writable!
@@ -83,6 +81,8 @@ WARN: /lib is world writable!
 WARN: /lib is group writable!
 ```
 
+重新给上面提示的文件夹恢复文件夹权限
+
 ```
 sudo chmod 755 /etc/ufw
 sudo chmod 644 /etc/ufw/* -R
@@ -90,6 +90,10 @@ sudo chmod 755 /lib/ufw
 sudo chmod 644 /lib/ufw/* -R
 ```
 
+## References
 
 * [Linux useradd 与 adduser的区别， /sbin/nologin 与 /bin/bash](https://blog.csdn.net/danson_yang/article/details/65629948)
 * [Ubuntu Linux Add a User To Group www-data ( Apache Group )](https://www.cyberciti.biz/faq/ubuntu-add-user-to-group-www-data/)
+* [bash-cd-ssh-permission-denied](https://unix.stackexchange.com/a/146195)
+* [Loggin in ssh server: Permission denied, please try again](https://serverfault.com/a/288237) `su - username`
+

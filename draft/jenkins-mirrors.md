@@ -1,4 +1,4 @@
-jenkins mirrors
+windows 安装 jenkins笔记
 
 Jenkins 所有镜像列表： [http://mirrors.jenkins-ci.org/status.html](http://mirrors.jenkins-ci.org/status.html) 可在镜像网站上下载安装文件，比官方下载快些
 
@@ -27,7 +27,7 @@ java -jar jenkins.war --httpPort=9080
 
 安装完成，windows系统服务中会自动注册jenkins服务并启动Jenkins；
 
-![images/191206/fs2019120600003e.jpg](images/191206/fs2019120600003e.jpg)
+![images/191206/fs2019120600003e.jpg](https://s2.ax1x.com/2019/12/13/QgLt2j.jpg)
 
 我安装时，会打开浏览器访问 [http://localhost:8080](http://localhost:8080)
 
@@ -53,7 +53,7 @@ net start jenkins # 在启动 jenkins
 
 或者在服务管理器进行重启 jenkins 服务:
 
-![](images/191206/fs2019120600005z.jpg)
+![images/191206/fs2019120600005z.jpg](https://s2.ax1x.com/2019/12/13/QgO9Jg.jpg)
 
 
 #### Jenkins 初始化
@@ -62,17 +62,17 @@ net start jenkins # 在启动 jenkins
 
 1. 浏览器访问 [http://localhost:8083](http://localhost:8083) ，会出现如下界面，找到密码文件输入密码点击继续
 
-![images/191206/fs2019120600006A.jpg](images/191206/fs2019120600006A.jpg)
+![images/191206/fs2019120600006A.jpg](https://s2.ax1x.com/2019/12/13/QgOZwV.jpg)
 
 2. 进入新手入门, 推荐 选择 `安装推荐的插件`，说明:`选择插件来安装` 也是默认选中了`安装推荐的插件`，是可以手动选择需要安装的插件。
 
-![images/191206/fs20191206000070.jpg](images/191206/fs20191206000070.jpg)
+![images/191206/fs20191206000070.jpg](https://s2.ax1x.com/2019/12/13/QgOuYF.jpg)
 
-![images/191206/fs2019120600008X.jpg](images/191206/fs2019120600008X.jpg)
+![images/191206/fs2019120600008X.jpg](https://s2.ax1x.com/2019/12/13/QgOALq.jpg)
 
 3. 等待插件安装完成，在`创建第一个管理员用户`页面设定好 管理员的用户名和密码之后，会进入到本地 Jenkins软件的首页
 
-![](images/191206/fs2019120600010i.jpg)
+![images/191206/fs2019120600010i.jpg](https://s2.ax1x.com/2019/12/13/QgOVe0.jpg)
 
 
 
@@ -92,13 +92,13 @@ net start jenkins # 在启动 jenkins
 1. 进入jenkins系统管理(Manage Jenkins)
 2.进入插件管理
 
-![images/191206/fs2019120600011a.jpg](images/191206/fs2019120600011a.jpg)
+![images/191206/fs2019120600011a.jpg](https://s2.ax1x.com/2019/12/13/QgOeoT.jpg)
 
-![images/191206/fs2019120600012Z.jpg](images/191206/fs2019120600012Z.jpg)
+![images/191206/fs2019120600012Z.jpg](https://s2.ax1x.com/2019/12/13/QgOkyn.jpg)
 
 地址我输入的是: [https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json](https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json)
 
-![images/191206/fs2019120600013Z.jpg](images/191206/fs2019120600013Z.jpg)
+![images/191206/fs2019120600013Z.jpg](https://s2.ax1x.com/2019/12/13/QgOnFU.jpg)
 
 ## References
 * [windows上Jenkins安装及其配置](https://www.cnblogs.com/fuxuepan/articles/9525623.html) windows 安装的参考博文

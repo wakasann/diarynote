@@ -1,6 +1,6 @@
 docker 安装 jenkins 笔记
 
-前提: 已安装好 docker，可运行 docker 命令
+前提: 已安装好 docker-ce，可运行 docker 命令
 
 命令:
 
@@ -31,27 +31,27 @@ sudo docker run --name jenkins01 -p 8081:8080 -p 50000:50000 -v ${PWD}/jenkins:/
 
 运行一段时间，可以看到输出初始化的密码
 
-![](images/191204/fs20191204000023.jpg)
+![images/191204/fs20191204000023.jpg](https://s2.ax1x.com/2019/12/13/QgObkT.jpg)
 
 
 
 通过浏览器访问 `http://ip:8081` 进入初始页,输入初始的管理员密码
 
-![](images/191204/fs2019120400003s.jpg)
+![images/191204/fs2019120400003s.jpg](https://s2.ax1x.com/2019/12/13/QgOomq.jpg)
 
 
 
-![](images/191204/fs2019120400004O.jpg)
+![images/191204/fs2019120400004O.jpg](https://s2.ax1x.com/2019/12/13/QgOqtU.jpg)
 
 可选择 "安装推荐的插件"或者 "选择插件来安装"
 
 
 
-![](images/191204/fs2019120400005s.jpg)
+![images/191204/fs2019120400005s.jpg](https://s2.ax1x.com/2019/12/13/QgO77V.jpg)
 
 等待插件的安装完成，然后点 `Continue` 进入下一步，进入`Create First Admin User` 页面，创建第一个 admin  用户，然后依次点击保存并完成，进入到jenkins的首页。
 
-![](images/191204/fs2019120400006m.jpg)
+![images/191204/fs2019120400006m.jpg](https://s2.ax1x.com/2019/12/13/QgOT00.jpg)
 
 至此，docker 版本的jenkins的安装已经结束。
 
