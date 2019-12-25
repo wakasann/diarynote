@@ -1,4 +1,4 @@
-Cpane/Apache 强制http跳转到https
+cpanle/Apache 强制http跳转到https
 
 因为租的虚拟主机是使用Cpanel,按照网上找的文章,处理的步骤如下:
 
