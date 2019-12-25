@@ -57,6 +57,16 @@ sudo apt-get install mplayer2
 
 
 
+播放单个mp3文件
+
+```
+mplayer /var/www/html/test.mp3
+```
+
+
+
+
+
 可以通过安装alsa工具来调整音量
 
 命令如下
