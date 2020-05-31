@@ -178,7 +178,7 @@ composer config -g --unset repos.packagist
 ```
 
 
-Vagrant 配置
+我的 `Vagrantfile` 配置
 
 ```
 # -*- mode: ruby -*-
