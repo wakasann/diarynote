@@ -71,6 +71,8 @@ vagrant up
 
 
 
+ps: 上图中的，可以是 `浏览` -> `用户密钥`, 导入的密钥，选择 该虚拟机工作目录下的 `private_key`导入，这样以后就不用老是选择了。
+
 通过以上的步骤，应该能通过xshell 成功连接 vagrant 基于ubuntu bionic的虚拟机的ssh了。
 
 ------
@@ -177,6 +179,47 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 composer config -g --unset repos.packagist
 ```
 
+### 修改Mysql 5.7 root的密码
+
+`sudo vim /etc/mysql/debian.cnf`,可以看到mysql默认的用户`debian-sys-maint`用户和密码
+
+```
+# Automatically generated for Debian scripts. DO NOT TOUCH!
+[client]
+host     = localhost
+user     = debian-sys-maint
+password = cRHEWj8bm6QvaS1d
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+host     = localhost
+user     = debian-sys-maint
+password = cRHEWj8bm6QvaS1d
+socket   = /var/run/mysqld/mysqld.sock
+```
+
+```
+#From Ubuntu
+mysql -u debian-sys-maint -p #登录mysql
+```
+
+```
+#from mysql-cli
+show databases;
+use mysql;
+update user set authentication_string=PASSWORD("自定义密码") where user='root';
+update user set plugin="mysql_native_password";
+flush privileges;
+quit;
+```
+
+```
+#From Ubuntu
+/etc/init.d/mysql restart
+```
+
+
+
+
 
 我的 `Vagrantfile` 配置
 
@@ -252,3 +295,8 @@ Vagrant.configure("2") do |config|
   # SHELL
 end
 ```
+
+
+
+## References
+* [Ubuntu-安装MySQL5.7并配置用户名密码](https://www.cnblogs.com/cm920/p/10029035.html)
