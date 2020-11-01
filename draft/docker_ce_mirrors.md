@@ -32,6 +32,18 @@ May 24 09:43:02 ubuntu systemd[1]: docker.service: Failed with result 'start-lim
 
 有可能是`/etc/docker/daemon.json` 文件配置錯誤導致的
 
+
+
+```
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
+
+
+
+
+
 拉取 gitlab-ce時，出現
 
 ```

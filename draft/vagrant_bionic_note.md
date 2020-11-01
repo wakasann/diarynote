@@ -77,9 +77,18 @@ ps: 上图中的，可以是 `浏览` -> `用户密钥`, 导入的密钥，选�
 
 ------
 
+## 修改Ubuntu Bionic源
+
 备份source
 
 `sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak`
+
+参考:
+
+* [阿里云官方镜像站](https://developer.aliyun.com/mirror/)
+* [清华大学开源软件镜像站 Ubuntu 镜像使用帮助](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)
+
+
 
 修改`sources.list`
 
@@ -100,6 +109,9 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
 # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
 ```
 
+## 安装Apache,PHP,Mysql软件
+
+#### 安装
 
 ```
 sudo apt-get update
@@ -112,19 +124,22 @@ sudo apt-get install mysql-server mysql-client mysql-utilities
 
 
 sudo apt-get install php
-
-sudo apt-get install php-gd
 sudo apt-get install php-xml php-xmlreader php-xmlrpc php-xmlwriter 
 sudo apt-get install php-bcmath php-curl php-mbstring php-mysqli
-sudo apt-get install php-pdo-sqlite
-sudo apt-get install php-pgsql php-soap
-sudo apt-get install php-dev
+sudo apt-get install php-pdo-sqlite  php-pgsql php-soap
+sudo apt-get install php-gd php-dev php-crypto
 
-sudo apt-get install php-crypto
+# 或安装PHP一条命令过
+sudo apt-get install php php-gd php-xml php-xmlreader php-xmlrpc php-xmlwriter  php-bcmath php-curl php-mbstring php-mysqli php-pdo-sqlite php-pgsql php-soap php-dev
+```
+#### apache的设定
 
+```
+# 启动apache重写模块
 sudo a2enmod rewrite
+# 重启apache服务
 sudo systemctl restart apache2
-
+# 编辑apache 默认的vhost文件
 sudo vim /etc/apache2/sites-enabled/000-default.conf
 ```
 
@@ -135,8 +150,9 @@ sudo vim /etc/apache2/sites-enabled/000-default.conf
     AllowOverride All
 </Directory>
 ```
+加入以上内容，是让`/var/www/html`目录下的项目允许重写
 
-重启 apache
+重启 apache 服务
 
 ```
 sudo systemctl restart apache2
@@ -148,7 +164,65 @@ sudo systemctl restart apache2
 sudo chmod 777 /var/www/html
 sudo chmod 777 /var/www/html/* -R
 ```
+#### mysql 设定
+在安装mysql 软件服务过程中，没有输入密码的交互界面，所以不清楚 root 用户的密码，需要手动进行设置一次 mysql root 用户的密码
 
+```
+sudo systemctl start mysql # 启动mysql 服务
+```
+
+1. 查看`debian-sys-maint` 用户的密码
+
+```
+sudo vim /etc/mysql/debian.cnf
+```
+可以看到类型如下格式的内容:
+
+```
+# Automatically generated for Debian scripts. DO NOT TOUCH!
+[client]
+host     = localhost
+user     = debian-sys-maint
+password = gvCPbzra1qI6m49X
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+....
+```
+上面`[clinet]`中的`user`和`password`是可以登入到mysql的用户名和密码.
+
+2. 通过`mysql` 命令进入 mysql cli 交互界面
+
+```
+#FROM Ubuntu
+mysql -u debian-sys-maint -p
+```
+
+```
+#From mysql cli
+mysql> use mysql;
+mysql> select user,plugin,host from user; #查看用户表的用户信息
+mysql> update user set authentication_string=password('新密码'),plugin="mysql_native_password" where user='root' and host="localhost"; #修改root用户的密码
+mysql> flush privileges; #刷新权限
+mysql> quit; #退出mysql cli交互界面
+```
+
+尝试使用修改过密码后的`root`用户登录,验证密码是否修改成功
+
+```
+mysql -u root -p
+```
+
+
+
+设置apache,mysql 开机启动
+
+```
+sudo systemctl enable apache2 # 设置apache开启启动
+# sudo systemctl disable apache2 #是设置取消apache开机启动
+sudo systemctl enable mysql
+```
+
+#### PHP Composer
 
 安装composer
 
