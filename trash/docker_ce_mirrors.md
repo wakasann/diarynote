@@ -1,4 +1,4 @@
-docker ce
+docker ce gitlabce 容器root密码重置小记
 
 參考: [Docker Community Edition 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/)
 
@@ -37,6 +37,14 @@ May 24 09:43:02 ubuntu systemd[1]: docker.service: Failed with result 'start-lim
 ```
 {
   "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
+
+下面镜像源是看博文时看到记下的，故记录下来了：
+
+```
+{
+  "registry-mirrors" : ["http://ovfftd6p.mirror.aliyuncs.com"]
 }
 ```
 

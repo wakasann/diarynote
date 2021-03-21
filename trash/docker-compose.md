@@ -1,4 +1,4 @@
-Docker Compose下载慢的处理笔记
+Docker Compose文件下载慢的处理笔记
 
 官网文档 [Install Compose on Linux systems](https://docs.docker.com/compose/install/#install-compose-on-linux-systems)的说明，运行以下命令进行下载当前稳定发布的 Docker Compose:
 
